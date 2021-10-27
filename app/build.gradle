@@ -48,7 +48,7 @@ dependencies {
 
 	//Adapter Delegates
 	implementation "com.hannesdorfmann:adapterdelegates4:4.0.0"
-
+Z
 	//Navigation
 	implementation "ru.terrakok.cicerone:cicerone:5.0.0" //https://github.com/terrakok/Cicerone
 

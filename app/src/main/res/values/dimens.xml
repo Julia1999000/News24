@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<dimen name="content_horizontal_padding">16dp</dimen>
+	<dimen name="content_vertical_padding">8dp</dimen>
+
+	<dimen name="S12">12dp</dimen>
+	<dimen name="S14">14dp</dimen>
+	<dimen name="S16">16dp</dimen>
+	<dimen name="S20">20dp</dimen>
+
+</resources>
