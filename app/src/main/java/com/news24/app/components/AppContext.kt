@@ -12,14 +12,13 @@ class AppContext: MultiDexApplication() {
         private set
 
     companion object {
-
-        var instance: AppContext? = null
+        lateinit var instance: AppContext
             private  set
-
     }
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
 
         Timber.plant(Timber.DebugTree())
 
@@ -27,7 +26,10 @@ class AppContext: MultiDexApplication() {
     }
 
     private fun initDaggerComponent(): AppComponent {
-        return DaggerAppComponent.builder().appModule(AppModule(this)).build()
+        return DaggerAppComponent
+                .builder()
+                .appModule(AppModule(this))
+                .build()
     }
 
 }

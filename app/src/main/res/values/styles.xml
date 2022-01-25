@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--styles are available to all API levels-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+	<!-- Application theme. -->
+	<style name="Theme.News24" parent="Theme.Base">
+		<item name="android:statusBarColor">?attr/colorOnSecondary</item>
+		<item name="android:navigationBarColor">?attr/colorOnSecondary</item>
+		<item name="android:windowBackground">?attr/colorOnPrimary</item>
+	</style>
+
+	<!-- Splash screen theme. -->
+	<style name="SplashScreenTheme" parent="Theme.News24" />
+
+</resources>

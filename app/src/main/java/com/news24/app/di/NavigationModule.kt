@@ -13,6 +13,12 @@ class NavigationModule {
 
 	@Provides
 	@Singleton
+	fun provideCicerone(): Cicerone<Router> {
+		return cicerone
+	}
+
+	@Provides
+	@Singleton
 	fun provideRouter(): Router {
 		return cicerone.router
 	}

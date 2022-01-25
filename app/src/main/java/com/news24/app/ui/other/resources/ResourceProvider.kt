@@ -1,6 +1,5 @@
 package com.news24.app.ui.other.resources
 
-import android.location.Location
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 
