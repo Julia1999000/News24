@@ -27,6 +27,7 @@ class SplashScreenActivity : BaseActivity(), SplashScreenContract.View {
 	lateinit var navigatorHolder: NavigatorHolder
 
 	private val navigator = ApplicationNavigator(this, -1)
+
 	private lateinit var activityBinding: ActivitySplashScreenBinding
 
 

@@ -4,4 +4,11 @@
 
 	<string name="common_todo">ещё не реализовано</string>
 
+	<!-- Welcome -->
+	<string name="welcome_skip">Пропустить</string>
+	<string name="welcome_title">Будь своевременно информирован</string>
+	<string name="onboarding_description_first">Скандалы и хайп</string>
+	<string name="onboarding_description_second">ЗОЖ и lifestyle</string>
+	<string name="onboarding_description_third">экспертиза и аналитика</string>
+	<string name="onboarding_description_fourth">события спорта</string>
 </resources>

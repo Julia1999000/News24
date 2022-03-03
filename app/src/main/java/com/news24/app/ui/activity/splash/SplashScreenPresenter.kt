@@ -43,8 +43,7 @@ class SplashScreenPresenter @Inject constructor(
 	private fun checkAuthStatusAndPerformActionIfAuthorized(action: () -> Unit) {
 
 		if (appService.isShouldShowOnboardingScreen()) {
-			// router.navigateTo(Screens.Auth.AuthScreenContainer(Screens.Onboarding()))
-			action()
+			router.replaceScreen(Screens.ContainerScreen(Screens.OnboardingScreen()))
 		} else {
 			action()
 		}

@@ -2,6 +2,9 @@ package com.news24.app.ui.activity.base
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
+import com.google.android.material.snackbar.Snackbar
 import com.news24.app.components.AppContext
 import com.news24.app.di.AppComponent
 import com.news24.app.helpers.KeyboardHelper
@@ -73,6 +76,24 @@ open class BaseActivity : MvpAppCompatActivity(), BaseScreenContract.View  {
 
 
 	//region ==================== Protected ====================
+
+	fun showSnackBar(message: String, actionText: String? = null, action: View.OnClickListener? = null, container: View? = null) {
+		val snackBar = Snackbar.make(container ?: window.decorView.findViewById(android.R.id.content),
+				message, Snackbar.LENGTH_SHORT)
+		if (actionText != null) {
+			snackBar.setAction(actionText, action)
+			snackBar.duration = Snackbar.LENGTH_INDEFINITE
+		}
+		try {
+			val snackBarView = snackBar.view
+			val textView = snackBarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+			textView.maxLines = 5
+		} catch (e: Exception) {
+			e.printStackTrace()
+		}
+
+		snackBar.show()
+	}
 
 	//endregion
 

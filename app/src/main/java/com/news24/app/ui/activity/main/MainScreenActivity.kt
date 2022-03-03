@@ -24,6 +24,7 @@ class MainScreenActivity : BaseActivity(), MainScreenContract.View {
 	lateinit var navigatorHolder: NavigatorHolder
 
 	private val navigator = ApplicationNavigator(this, -1)
+
 	private lateinit var activityBinding: ActivityMainScreenBinding
 
 	//region ==================== Lifecycle callbacks ====================

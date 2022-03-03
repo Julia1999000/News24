@@ -8,7 +8,6 @@
 
 	<!-- Text with sizes-->
 
-
 	<style name="S12" parent="BaseTextStyle">
 		<item name="android:textSize">@dimen/S12</item>
 	</style>
@@ -23,6 +22,10 @@
 
 	<style name="S20" parent="BaseTextStyle">
 		<item name="android:textSize">@dimen/S20</item>
+	</style>
+
+	<style name="S22" parent="BaseTextStyle">
+		<item name="android:textSize">@dimen/S22</item>
 	</style>
 
 	<!--Text with fonts-->
@@ -91,6 +94,22 @@
 		<item name="android:fontFamily">@font/nunito_extra_bold</item>
 	</style>
 
+	<style name="S22Regular" parent="S22">
+		<item name="android:fontFamily">@font/nunito_regular</item>
+	</style>
+
+	<style name="S22SemiBold" parent="S22">
+		<item name="android:fontFamily">@font/nunito_semibold</item>
+	</style>
+
+	<style name="S22Bold" parent="S22">
+		<item name="android:fontFamily">@font/nunito_bold</item>
+	</style>
+
+	<style name="S22ExtraBold" parent="S22">
+		<item name="android:fontFamily">@font/nunito_extra_bold</item>
+	</style>
+
 	<!-- Texts with colors -->
 
 	<style name="S12RegularBlack1C" parent="S12Regular">
@@ -105,7 +124,29 @@
 		<item name="android:textColor">@color/black_1C</item>
 	</style>
 
+
+	<style name="S16BoldBlack1C" parent="S16Bold">
+		<item name="android:textColor">@color/black_1C</item>
+	</style>
+
+	<style name="S16BoldWhite" parent="S16Bold">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+	<style name="S20SemiBoldBlack1C" parent="S20SemiBold">
+		<item name="android:textColor">@color/black_1C</item>
+	</style>
+
+	<style name="S20BoldBlack1C" parent="S20Bold">
+		<item name="android:textColor">@color/black_1C</item>
+	</style>
+
 	<style name="S20ExtraBoldBlack1C" parent="S20ExtraBold">
+		<item name="android:textColor">@color/black_1C</item>
+	</style>
+
+
+	<style name="S22BoldBlack1C" parent="S22Bold">
 		<item name="android:textColor">@color/black_1C</item>
 	</style>
 

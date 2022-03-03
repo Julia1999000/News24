@@ -17,11 +17,6 @@ android {
 		versionName "1.0"
 		vectorDrawables.useSupportLibrary = true
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-		/*kapt {
-			includeCompileClasspath = false
-		}*/
-
 	}
 
 	sourceSets {
@@ -88,6 +83,8 @@ dependencies {
 	implementation "com.github.bumptech.glide:glide:4.11.0" //https://github.com/bumptech/glide
 
 	implementation 'com.airbnb.android:lottie:3.6.1'
+	implementation "androidx.viewpager2:viewpager2:1.0.0"
+	implementation 'com.tbuonomo:dotsindicator:4.2'
 
 	//Tests
 	testImplementation 'junit:junit:4.13.1'

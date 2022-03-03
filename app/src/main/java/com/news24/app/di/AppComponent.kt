@@ -4,10 +4,14 @@ import com.news24.app.components.AppContext
 import com.news24.app.data.AppDataModule
 import com.news24.app.ui.activity.base.BaseScreenComponent
 import com.news24.app.ui.activity.base.BaseScreenModule
+import com.news24.app.ui.activity.container.ContainerScreenComponent
+import com.news24.app.ui.activity.container.ContainerScreenModule
 import com.news24.app.ui.activity.main.MainScreenComponent
 import com.news24.app.ui.activity.main.MainScreenModule
 import com.news24.app.ui.activity.splash.SplashScreenComponent
 import com.news24.app.ui.activity.splash.SplashScreenModule
+import com.news24.app.ui.fragment.onboarding.OnboardingScreenComponent
+import com.news24.app.ui.fragment.onboarding.OnboardingScreenModule
 import dagger.Component
 import javax.inject.Singleton
 
@@ -28,4 +32,7 @@ interface AppComponent {
 
     fun plus(module: SplashScreenModule): SplashScreenComponent
 
+    fun plus(module: ContainerScreenModule): ContainerScreenComponent
+
+    fun plus(module: OnboardingScreenModule): OnboardingScreenComponent
 }

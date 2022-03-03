@@ -2,9 +2,5 @@
 <!--styles available only with API level 27+-->
 <resources>
 	<!-- Application theme. -->
-	<style name="Theme.News24" parent="Theme.Base">
-		<item name="android:statusBarColor">?attr/colorTransparent</item>
-		<item name="android:navigationBarColor">?attr/colorTransparent</item>
-		<item name="android:windowBackground">?attr/colorOnPrimary</item>
-	</style>
+
 </resources>

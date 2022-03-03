@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<ImageView
+		android:id="@+id/ivImg"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_marginTop="10dp"
+		android:layout_marginStart="81dp"
+		android:layout_marginEnd="58dp"
+		app:layout_constraintDimensionRatio="189:190"
+		app:layout_constraintTop_toTopOf="parent"
+		tools:ignore="ContentDescription" />
+
+	<TextView
+		android:id="@+id/tvDescription"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:layout_marginTop="30dp"
+		android:paddingBottom="50dp"
+		android:layout_marginStart="52dp"
+		android:layout_marginEnd="52dp"
+		style="@style/S20SemiBoldBlack1C"
+		app:layout_constraintTop_toBottomOf="@+id/ivImg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,5 +8,6 @@
 	<dimen name="S14">14dp</dimen>
 	<dimen name="S16">16dp</dimen>
 	<dimen name="S20">20dp</dimen>
+	<dimen name="S22">22dp</dimen>
 
 </resources>
