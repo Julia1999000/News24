@@ -1,10 +1,8 @@
 package com.news24.app.ui.fragment.base
 
-
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updateLayoutParams
-import androidx.core.view.updatePadding
 import com.news24.app.components.AppContext
 import com.news24.app.di.AppComponent
 import com.news24.app.helpers.KeyboardHelper
@@ -13,6 +11,7 @@ import com.news24.app.ui.navigation.RouterProvider
 import com.news24.app.utils.DeviceUtils
 import moxy.MvpAppCompatFragment
 import ru.terrakok.cicerone.Router
+
 
 open class BaseFragment : MvpAppCompatFragment() {
 

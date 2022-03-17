@@ -5,6 +5,7 @@ import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
+
 interface SplashScreenContract {
 
 	@StateStrategyType(value = AddToEndSingleStrategy::class)

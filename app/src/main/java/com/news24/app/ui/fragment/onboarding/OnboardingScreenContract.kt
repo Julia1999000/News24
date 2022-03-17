@@ -7,6 +7,7 @@ import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
+
 interface OnboardingScreenContract {
 
 	@StateStrategyType(value = AddToEndSingleStrategy::class)
@@ -15,6 +16,7 @@ interface OnboardingScreenContract {
 		fun showItemList(items: List<ListViewModel>)
 
 	}
+
 
 	abstract class Presenter : BaseDisposablePresenter<View>() {
 

@@ -11,9 +11,9 @@ import com.news24.app.ui.adapter.ListViewModel
 import javax.inject.Inject
 import javax.inject.Named
 
+
 class OnboardingViewModelDelegate @Inject constructor(
 		@Named(NamedDependencies.ACTIVITY_CONTEXT) private val context: Context
-		//private val itemClickListener: ListItemClickListener? = null
 ) : AbsListItemAdapterDelegate<OnboardingViewModel, ListViewModel, BindingViewHolder<ListItemOnboardingPageBinding>>() {
 
 	private val layoutInflater = LayoutInflater.from(context)

@@ -4,10 +4,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
 
+
 @Subcomponent(modules = [MainScreenModule::class])
 interface MainScreenComponent {
 
-	fun inject(activity: MainScreenActivity)
+	fun inject(activity: MainScreenContainerActivity)
 
 }
 

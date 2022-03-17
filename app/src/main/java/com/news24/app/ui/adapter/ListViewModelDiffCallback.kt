@@ -2,6 +2,7 @@ package com.news24.app.ui.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 
+
 class ListViewModelDiffCallback(
 		private var oldList: List<ListViewModel>? = null,
 		private var newList: List<ListViewModel>? = null

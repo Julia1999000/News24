@@ -17,18 +17,18 @@
 	<style name="NonTransparentScreenTheme" parent="Theme.News24">
 		<item name="android:windowTranslucentStatus">false</item>
 		<item name="android:windowTranslucentNavigation">false</item>
-		<item name="android:statusBarColor">?attr/colorOnPrimary</item>
-		<item name="android:navigationBarColor">?attr/colorOnPrimary</item>
+		<item name="android:statusBarColor">?attr/colorSecondary</item>
+		<item name="android:navigationBarColor">?attr/colorSecondary</item>
 	</style>
 
 	<!-- Splash screen theme. -->
 	<style name="SplashScreenTheme" parent="TranslucentScreenTheme">
-		<item name="android:windowBackground">?attr/colorOnPrimary</item>
+		<item name="android:windowBackground">?attr/colorSecondary</item>
 	</style>
 
 	<!-- Screen theme. -->
 	<style name="ScreenTheme" parent="NonTransparentScreenTheme">
-		<item name="android:windowBackground">?attr/colorOnPrimary</item>
+		<item name="android:windowBackground">?attr/colorSecondary</item>
 	</style>
 
 

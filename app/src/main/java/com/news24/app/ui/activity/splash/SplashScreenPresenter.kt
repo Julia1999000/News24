@@ -6,6 +6,7 @@ import moxy.InjectViewState
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
+
 @InjectViewState
 class SplashScreenPresenter @Inject constructor(
 		private val router: Router,
@@ -25,13 +26,13 @@ class SplashScreenPresenter @Inject constructor(
 
 	override fun onScreenLoadedWithoutExtraParams() {
 		checkAuthStatusAndPerformActionIfAuthorized {
-			router.newRootScreen(Screens.MainScreen())
+			router.newRootScreen(Screens.MainContainerScreen())
 		}
 	}
 
 	override fun onExtraParamsReceived(data: Map<String, Any>) {
 		checkAuthStatusAndPerformActionIfAuthorized {
-			router.newRootScreen(Screens.MainScreen())
+			router.newRootScreen(Screens.MainContainerScreen())
 		}
 	}
 

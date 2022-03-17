@@ -13,6 +13,7 @@ interface ContainerScreenContract {
 
 	}
 
+
 	abstract class Presenter : BaseDisposablePresenter<View>() {
 
 	}

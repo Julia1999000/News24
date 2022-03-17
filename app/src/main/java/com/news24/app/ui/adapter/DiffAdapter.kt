@@ -2,6 +2,7 @@ package com.news24.app.ui.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 
+
 open class DiffAdapter : BaseAdapter() {
 
 	override fun swapItems(items: List<ListViewModel>) {

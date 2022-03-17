@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 
+
 open class BaseAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 	protected var delegatesManager: AdapterDelegatesManager<List<ListViewModel>> = AdapterDelegatesManager()

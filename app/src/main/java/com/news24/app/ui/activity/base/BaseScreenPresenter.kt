@@ -1,6 +1,5 @@
 package com.news24.app.ui.activity.base
 
-
 import moxy.InjectViewState
 import javax.inject.Inject
 

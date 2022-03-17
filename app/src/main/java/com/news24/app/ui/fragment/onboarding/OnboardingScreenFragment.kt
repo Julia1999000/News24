@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.news24.app.databinding.FragmentOnboardingBinding
+import com.news24.app.databinding.FragmentOnboardingScreenBinding
 import com.news24.app.ui.adapter.ListViewModel
 import com.news24.app.ui.fragment.base.BaseFragment
 import com.news24.app.ui.fragment.onboarding.adapter.OnboardingAdapter
@@ -12,6 +12,7 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 import javax.inject.Provider
+
 
 class OnboardingScreenFragment : BaseFragment(), OnboardingScreenContract.View {
 
@@ -21,8 +22,7 @@ class OnboardingScreenFragment : BaseFragment(), OnboardingScreenContract.View {
 	@Inject
 	lateinit var presenterProvider: Provider<OnboardingScreenContract.Presenter>
 
-	//private lateinit var fragmentBinding: FragmentOnboardingBinding
-	private val fragmentBinding by lazy { FragmentOnboardingBinding.inflate(layoutInflater) }
+	private val fragmentBinding by lazy { FragmentOnboardingScreenBinding.inflate(layoutInflater) }
 
 	@Inject
 	lateinit var adapter: OnboardingAdapter
@@ -51,8 +51,6 @@ class OnboardingScreenFragment : BaseFragment(), OnboardingScreenContract.View {
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-		//return inflater.inflate(R.layout.fragment_onboarding, container, false)
-		//fragmentBinding = FragmentOnboardingBinding.inflate(inflater, container, false)
 		return fragmentBinding.root
 	}
 

@@ -137,6 +137,10 @@
 		<item name="android:textColor">@color/black_1C</item>
 	</style>
 
+	<style name="S20SemiBoldBlackOrWhite" parent="S20SemiBold">
+		<item name="android:textColor">?attr/colorSecondaryVariant</item>
+	</style>
+
 	<style name="S20BoldBlack1C" parent="S20Bold">
 		<item name="android:textColor">@color/black_1C</item>
 	</style>
@@ -147,7 +151,11 @@
 
 
 	<style name="S22BoldBlack1C" parent="S22Bold">
-		<item name="android:textColor">@color/black_1C</item>
+		<item name="android:textColor">?attr/colorSecondaryVariant</item>
+	</style>
+
+	<style name="S22BoldBlackOrWhite" parent="S22Bold">
+		<item name="android:textColor">?attr/colorSecondaryVariant</item>
 	</style>
 
 </resources>

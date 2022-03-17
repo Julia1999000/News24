@@ -10,13 +10,13 @@ import moxy.InjectViewState
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
+
 @InjectViewState
 class OnboardingScreenPresenter @Inject constructor(
 		private val router: Router,
 		private val resourceProvider: ResourceProvider,
 		private val appService: AppService
 ) : OnboardingScreenContract.Presenter() {
-
 
 	companion object {
 		private const val FIRST_PAGE_SLIDER_ID = "FIRST_PAGE_SLIDER_ID"
@@ -30,7 +30,7 @@ class OnboardingScreenPresenter @Inject constructor(
 
 	override fun onFirstViewAttach() {
 		super.onFirstViewAttach()
-		//appService.setShouldShowOnboardingScreen(false) TODO вернуть
+		appService.setShouldShowOnboardingScreen(false)
 
 		val viewModels = arrayListOf<ListViewModel>()
 
@@ -60,7 +60,7 @@ class OnboardingScreenPresenter @Inject constructor(
 	//region ==================== OnboardingScreenContract.Presenter ====================
 
 	override fun onSkipButtonClicked() {
-		router.replaceScreen(Screens.MainScreen())
+		router.replaceScreen(Screens.MainContainerScreen())
 	}
 
 	//endregion

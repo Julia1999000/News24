@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools">
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
 	<androidx.constraintlayout.widget.Guideline
 		android:id="@+id/glOffsetTop"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
-		app:layout_constraintGuide_percent="0.1"/>
+		app:layout_constraintGuide_percent="0.1" />
 
 	<TextView
 		android:id="@+id/tvTitle"
+		style="@style/S22BoldBlackOrWhite"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:gravity="center_horizontal"
 		android:layout_marginHorizontal="45dp"
-		style="@style/S22BoldBlack1C"
+		android:gravity="center_horizontal"
 		android:text="@string/welcome_title"
 		app:layout_constraintTop_toTopOf="@id/glOffsetTop" />
 
 	<androidx.viewpager2.widget.ViewPager2
 		android:id="@+id/slider"
 		android:layout_width="wrap_content"
-		android:layout_marginHorizontal="@dimen/content_horizontal_padding"
 		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_horizontal_padding"
+		android:layout_marginVertical="@dimen/content_horizontal_padding"
 		android:clipChildren="false"
 		android:clipToPadding="false"
-		android:layout_marginVertical="@dimen/content_horizontal_padding"
-		tools:listitem="@layout/list_item_onboarding_page"
-		app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+		app:layout_constraintBottom_toTopOf="@+id/indicatorContainer"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		app:layout_constraintBottom_toTopOf="@+id/indicatorContainer" />
+		app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+		tools:listitem="@layout/list_item_onboarding_page" />
 
 	<com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
 		android:id="@+id/indicatorContainer"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		app:dotsColor="@color/yellow_29"
-		app:dotsStrokeColor="@color/yellow_29"
-		app:dotsSize="12dp"
-		app:dotsStrokeWidth="1dp"
 		android:layout_marginTop="2dp"
 		android:layout_marginBottom="32dp"
+		app:dotsColor="@color/yellow_29"
+		app:dotsSize="12dp"
+		app:dotsStrokeColor="@color/yellow_29"
+		app:dotsStrokeWidth="1dp"
+		app:layout_constraintBottom_toTopOf="@+id/btnSkip"
 		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
-		app:layout_constraintBottom_toTopOf="@+id/btnSkip"/>
+		app:layout_constraintRight_toRightOf="parent" />
 
 	<TextView
 		android:id="@+id/btnSkip"
 		style="@style/YellowButton"
 		android:layout_marginLeft="@dimen/content_horizontal_padding"
 		android:layout_marginRight="@dimen/content_horizontal_padding"
-		android:text="@string/welcome_skip"
 		android:layout_marginBottom="@dimen/content_horizontal_padding"
+		android:text="@string/welcome_skip"
 		app:layout_constraintBottom_toBottomOf="parent"
 		tools:ignore="MissingConstraints" />
 

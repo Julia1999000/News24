@@ -8,12 +8,14 @@ import dagger.Provides
 import dagger.Subcomponent
 import javax.inject.Named
 
+
 @Subcomponent(modules = [OnboardingScreenModule::class])
 interface OnboardingScreenComponent {
 
 	fun inject(fragment: OnboardingScreenFragment)
 
 }
+
 
 @Module
 class OnboardingScreenModule(private val activity: Activity) {

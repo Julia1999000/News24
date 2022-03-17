@@ -26,7 +26,7 @@
 		android:paddingBottom="50dp"
 		android:layout_marginStart="52dp"
 		android:layout_marginEnd="52dp"
-		style="@style/S20SemiBoldBlack1C"
+		style="@style/S20SemiBoldBlackOrWhite"
 		app:layout_constraintTop_toBottomOf="@+id/ivImg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

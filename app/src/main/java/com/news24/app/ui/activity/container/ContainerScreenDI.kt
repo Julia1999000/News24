@@ -7,12 +7,14 @@ import dagger.Subcomponent
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import javax.inject.Named
 
+
 @Subcomponent(modules = [ContainerScreenModule::class])
 interface ContainerScreenComponent {
 
 	fun inject(activity: ContainerScreenActivity)
 
 }
+
 
 @Module
 class ContainerScreenModule(private val startScreen: SupportAppScreen?) {

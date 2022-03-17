@@ -2,6 +2,7 @@ package com.news24.app.ui.adapter
 
 import com.news24.app.BuildConfig
 
+
 data class Change<out T>(
 		val oldData: T,
 		val newData: T

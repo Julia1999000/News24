@@ -13,6 +13,7 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Provider
 
+
 open class BaseActivity : MvpAppCompatActivity(), BaseScreenContract.View  {
 
 	@InjectPresenter
