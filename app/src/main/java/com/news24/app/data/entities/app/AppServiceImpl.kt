@@ -29,9 +29,6 @@ class AppServiceImpl @Inject constructor(context: Context) : AppService {
 		preferences.edit {
 			putBoolean(KEY_SHOULD_SHOW_ONBOARDING_SCREEN, shouldShow)
 		}
-	/*	preferences.edit()
-				.putBoolean(KEY_SHOULD_SHOW_ONBOARDING_SCREEN, shouldShow)
-				.apply()*/
 	}
 
 	//endregion

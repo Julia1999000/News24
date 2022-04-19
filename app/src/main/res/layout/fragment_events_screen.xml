@@ -4,10 +4,12 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<TextView
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/rvEvents"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:gravity="center"
-		android:text="@string/bottom_navigation_events" />
+		android:clipToPadding="false"
+		android:overScrollMode="never"
+		android:paddingBottom="4dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

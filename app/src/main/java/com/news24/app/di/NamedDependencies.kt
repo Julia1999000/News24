@@ -6,4 +6,6 @@ object NamedDependencies {
 
 	const val ACTIVITY_CONTEXT = "activity_context"
 
+	const val TAB_ROUTER = "TabRouter"
+
 }

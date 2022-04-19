@@ -17,4 +17,10 @@
 	<string name="bottom_navigation_settings">Настройки</string>
 	<string name="bottom_navigation_profile">Профиль</string>
 
+	<string name="test_article_header">заголовок</string>
+
+	<!-- Broadcast -->
+	<string name="live">LIVE</string>
+	<string name="live_end">Трансляция окончена</string>
+
 </resources>

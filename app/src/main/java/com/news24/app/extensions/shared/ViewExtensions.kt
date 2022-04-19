@@ -4,6 +4,9 @@ import android.graphics.Rect
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
+import com.news24.app.helpers.DimensHelper.dpToPx
+
 
 fun View.doOnApplyWindowInsets(f: (View, WindowInsetsCompat, Rect) -> Unit) {
 	val initialPadding = recordInitialPaddingForView(this)
@@ -35,4 +38,9 @@ fun View.requestApplyInsetsWhenAttached() {
 			override fun onViewDetachedFromWindow(v: View) = Unit
 		})
 	}
+}
+
+fun View.setPaddingExceptTop(paddingDp: Int) {
+	val paddingPx = paddingDp.dpToPx(this.context)
+	this.updatePadding(paddingPx,0, paddingPx, paddingPx)
 }

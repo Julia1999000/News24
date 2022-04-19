@@ -19,4 +19,10 @@ object DimensHelper {
         return value / (metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
     }
 
+    fun Int.dpToPx(context: Context): Int {
+        return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), context.resources.displayMetrics
+        ).toInt()
+    }
+
 }

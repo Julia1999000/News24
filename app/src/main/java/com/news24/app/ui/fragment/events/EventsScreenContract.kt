@@ -11,12 +11,16 @@ interface EventsScreenContract {
 	@StateStrategyType(value = AddToEndSingleStrategy::class)
 	interface View : MvpView {
 
-		fun showItemList(items: List<ListViewModel>)
+		fun showData(items: List<ListViewModel>)
 
 	}
 
 
 	abstract class Presenter : BaseDisposablePresenter<View>() {
+
+		abstract fun onListItemClicked(item: ListViewModel)
+
+		abstract fun onListScrolled(lastVisibleItemPosition: Int)
 
 	}
 
