@@ -6,6 +6,7 @@ import com.news24.app.di.NamedDependencies
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
+import ru.terrakok.cicerone.Router
 import javax.inject.Named
 
 
@@ -18,7 +19,10 @@ interface SettingsScreenComponent {
 
 
 @Module
-class SettingsScreenModule(private val activity: Activity) {
+class SettingsScreenModule(
+		private val activity: Activity,
+		private val router: Router? = null
+) {
 
 	@Provides
 	fun presenter(settingsScreenPresenter: SettingsScreenPresenter): SettingsScreenContract.Presenter {
@@ -29,6 +33,12 @@ class SettingsScreenModule(private val activity: Activity) {
 	@Named(NamedDependencies.ACTIVITY_CONTEXT)
 	fun activityContext(): Context {
 		return activity
+	}
+
+	@Provides
+	@Named(NamedDependencies.TAB_ROUTER)
+	fun router(appRouter: Router): Router {
+		return this.router ?: appRouter
 	}
 
 }

@@ -63,7 +63,8 @@ class ArticleViewModelDelegate @Inject constructor(
 			}
 
 			tvHeader.text = item.title
-			ImageHelper.loadImageByUrlToImageView(item.img, ivBackground, ImageHelper.CENTER_CROP, R.color.grey_F3)
+			ImageHelper.loadImageByUrlToImageView(item.img, ivBackground, ImageHelper.CENTER_CROP,
+				R.color.grey_79, successAction = { shimmerContainer.hideShimmer() })
 		}
 	}
 

@@ -1,17 +1,22 @@
 package com.news24.app.ui.fragment.events
 
 import android.os.Bundle
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.news24.app.R
 import com.news24.app.databinding.FragmentEventsScreenBinding
+import com.news24.app.extensions.shared.setTextWithSpan
+import com.news24.app.helpers.DimensHelper.dpToPx
 import com.news24.app.ui.adapter.ListViewModel
 import com.news24.app.ui.adapter.listener.ListItemClickListener
 import com.news24.app.ui.fragment.base.BaseFragment
 import com.news24.app.ui.fragment.events.adapter.BaseEventViewModel
-import com.news24.app.ui.fragment.events.adapter.EventItemOffsetDecoration
+import com.news24.app.ui.adapter.ItemDecorator
 import com.news24.app.ui.fragment.events.adapter.EventsAdapter
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -33,12 +38,13 @@ class EventsScreenFragment : BaseFragment(), EventsScreenContract.View {
 	lateinit var adapter: EventsAdapter
 
 	@Inject
-	lateinit var decoration: EventItemOffsetDecoration
+	lateinit var itemDecorator: ItemDecorator
 
 	//region ==================== Fragment creation ====================
 
 	companion object {
 		const val EVENTS_COLUMNS_COUNT = 2
+		const val EVENT_ITEM_OFFSET_DECORATION_DP = 1
 
 		fun newInstance(): EventsScreenFragment {
 			val args = Bundle()
@@ -77,6 +83,12 @@ class EventsScreenFragment : BaseFragment(), EventsScreenContract.View {
 	private val itemClickListener = object : ListItemClickListener {
 		override fun onListItemClicked(delegateViewModel: ListViewModel) {
 			presenter.onListItemClicked(delegateViewModel)
+		}
+	}
+
+	private val onEventsSpanSizeProvider = object: GridLayoutManager.SpanSizeLookup() {
+		override fun getSpanSize(position: Int): Int {
+			return (adapter.items[position] as? BaseEventViewModel)?.getSpanSize() ?: 0
 		}
 	}
 
@@ -123,15 +135,20 @@ class EventsScreenFragment : BaseFragment(), EventsScreenContract.View {
 	private fun initUI(view: View) {
 		fragmentBinding.apply {
 			val gridLayoutManager =  GridLayoutManager(context, EVENTS_COLUMNS_COUNT)
-			gridLayoutManager.spanSizeLookup = object: GridLayoutManager.SpanSizeLookup() {
-				override fun getSpanSize(position: Int): Int {
-					return (adapter.items[position] as? BaseEventViewModel)?.getSpanSize() ?: 0
-				}
+			gridLayoutManager.spanSizeLookup = onEventsSpanSizeProvider
+			if (rvEvents.itemDecorationCount < 1) {
+				itemDecorator.itemOffset = EVENT_ITEM_OFFSET_DECORATION_DP.dpToPx(requireActivity())
+				rvEvents.addItemDecoration(itemDecorator)
 			}
-			rvEvents.addItemDecoration(decoration)
 			rvEvents.layoutManager = gridLayoutManager
 			rvEvents.adapter = adapter
 			rvEvents.addOnScrollListener(onEventsScrollListener)
+
+			topAppBar.setTextWithSpan(
+				resources.getString(R.string.app_name),
+				resources.getString(R.string.span_app_name),
+				listOf(ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.yellow_29)))
+			)
 		}
 	}
 

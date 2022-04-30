@@ -31,7 +31,7 @@
 		<item name="android:windowBackground">?attr/colorSecondary</item>
 	</style>
 
-
+	<!-- Button theme. -->
 	<style name="Button" parent="@style/S16BoldBlack1C">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">48dp</item>
@@ -40,6 +40,14 @@
 
 	<style name="YellowButton" parent="@style/Button">
 		<item name="android:background">@drawable/background_yellow_button_12dp</item>
+	</style>
+
+	<!-- App bar theme. -->
+	<style name="CenteredAppBarTheme" parent="@style/Widget.MaterialComponents.Toolbar.Primary">
+		<item name="android:background">?attr/colorSecondary</item>
+		<item name="titleTextAppearance">@style/S24ExtraBoldBlackOrWhite</item>
+		<item name="titleCentered">true</item>
+		<item name="titleTextColor">?attr/colorSecondaryVariant</item>
 	</style>
 
 </resources>

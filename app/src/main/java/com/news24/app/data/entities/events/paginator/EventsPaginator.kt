@@ -28,7 +28,7 @@ class EventsPaginator @Inject constructor(
 
 	//region ===================== Paginator ======================
 
-	override fun canLoadNext(): Boolean {
+	override fun isCanLoadNext(): Boolean {
 		return canLoadNext
 	}
 

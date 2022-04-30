@@ -42,5 +42,5 @@ fun View.requestApplyInsetsWhenAttached() {
 
 fun View.setPaddingExceptTop(paddingDp: Int) {
 	val paddingPx = paddingDp.dpToPx(this.context)
-	this.updatePadding(paddingPx,0, paddingPx, paddingPx)
+	this.updatePadding(paddingPx, 0, paddingPx, paddingPx)
 }

@@ -34,6 +34,7 @@ class EventsScreenPresenter @Inject constructor(
 	private var events: List<Event> = listOf()
 	private var eventsViewModels: List<ListViewModel> = emptyList()
 	private var eventsDisposable: Disposable? = null
+	private var lastVisibleItemPosition = 0
 
 	companion object {
 		private const val LOAD_ADDITIONAL_ITEMS_THRESHOLD = 10
@@ -54,7 +55,9 @@ class EventsScreenPresenter @Inject constructor(
 	//region ==================== EventsScreenContract.Presenter ====================
 
 	override fun onListScrolled(lastVisibleItemPosition: Int) {
-		if (hasThresholdBeenReached(lastVisibleItemPosition) && eventsPaginator.canLoadNext()) {
+		this.lastVisibleItemPosition = lastVisibleItemPosition
+
+		if (isCanToLoadData()) {
 			eventsPaginator.loadNext()
 		}
 	}
@@ -110,7 +113,7 @@ class EventsScreenPresenter @Inject constructor(
 		}
 		configViewModelSize(listViewModel)
 		eventsViewModels = listViewModel
-		viewState.showData(listViewModel)
+		viewState.showData(eventsViewModels)
 	}
 
 	private fun configViewModelSize(listViewModel: ArrayList<ListViewModel>) {
@@ -152,8 +155,12 @@ class EventsScreenPresenter @Inject constructor(
 		}
 	}
 
-	private fun hasThresholdBeenReached(lastVisiblePosition: Int): Boolean {
-		return lastVisiblePosition > 0 && lastVisiblePosition >= eventsViewModels.size - LOAD_ADDITIONAL_ITEMS_THRESHOLD
+	private fun isCanToLoadData(): Boolean {
+		return isHasThresholdBeenReached() && eventsPaginator.isCanLoadNext()
+	}
+
+	private fun isHasThresholdBeenReached(): Boolean {
+		return lastVisibleItemPosition > 0 && lastVisibleItemPosition >= eventsViewModels.size - LOAD_ADDITIONAL_ITEMS_THRESHOLD
 	}
 
 	//endregion
