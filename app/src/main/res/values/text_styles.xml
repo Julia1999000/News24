@@ -36,6 +36,14 @@
 		<item name="android:textSize">@dimen/S24</item>
 	</style>
 
+	<style name="S34" parent="BaseTextStyle">
+		<item name="android:textSize">@dimen/S34</item>
+	</style>
+
+	<style name="S36" parent="BaseTextStyle">
+		<item name="android:textSize">@dimen/S36</item>
+	</style>
+
 	<!--Text with fonts-->
 
 	<style name="S12Regular" parent="S12">
@@ -90,6 +98,10 @@
 		<item name="android:fontFamily">@font/nunito_bold</item>
 	</style>
 
+	<style name="S18SemiBold" parent="S18">
+		<item name="android:fontFamily">@font/nunito_semibold</item>
+	</style>
+
 	<style name="S20Regular" parent="S20">
 		<item name="android:fontFamily">@font/nunito_regular</item>
 	</style>
@@ -138,6 +150,38 @@
 		<item name="android:fontFamily">@font/nunito_extra_bold</item>
 	</style>
 
+	<style name="S34Regular" parent="S34">
+		<item name="android:fontFamily">@font/nunito_regular</item>
+	</style>
+
+	<style name="S34SemiBold" parent="S34">
+		<item name="android:fontFamily">@font/nunito_semibold</item>
+	</style>
+
+	<style name="S34Bold" parent="S34">
+		<item name="android:fontFamily">@font/nunito_bold</item>
+	</style>
+
+	<style name="S34ExtraBold" parent="S34">
+		<item name="android:fontFamily">@font/nunito_extra_bold</item>
+	</style>
+
+	<style name="S36Regular" parent="S36">
+		<item name="android:fontFamily">@font/nunito_regular</item>
+	</style>
+
+	<style name="S36SemiBold" parent="S36">
+		<item name="android:fontFamily">@font/nunito_semibold</item>
+	</style>
+
+	<style name="S36Bold" parent="S36">
+		<item name="android:fontFamily">@font/nunito_bold</item>
+	</style>
+
+	<style name="S36ExtraBold" parent="S36">
+		<item name="android:fontFamily">@font/nunito_extra_bold</item>
+	</style>
+
 	<!-- Texts with colors -->
 
 	<style name="S12RegularBlack1C" parent="S12Regular">
@@ -165,6 +209,10 @@
 		<item name="android:textColor">@color/white</item>
 	</style>
 
+	<style name="S14RegularWhite" parent="S14Regular">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
 
 	<style name="S16BoldBlack1C" parent="S16Bold">
 		<item name="android:textColor">@color/black_1C</item>
@@ -174,8 +222,16 @@
 		<item name="android:textColor">@color/white</item>
 	</style>
 
+	<style name="S16RegularWhite" parent="S16Regular">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
 
 	<style name="S18BoldWhite" parent="S18Bold">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+	<style name="S18SemiBoldWhite" parent="S18SemiBold">
 		<item name="android:textColor">@color/white</item>
 	</style>
 
@@ -210,8 +266,26 @@
 		<item name="android:textColor">@color/white</item>
 	</style>
 
-	<style name="S24ExtraBoldBlackOrWhite" parent="S24Bold">
+	<style name="S24ExtraBoldBlackOrWhite" parent="S24ExtraBold">
 		<item name="android:textColor">?attr/colorSecondaryVariant</item>
+	</style>
+
+
+	<style name="S34BoldWhite" parent="S34Bold">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+	<style name="S34ExtraBoldBlackOrWhite" parent="S34ExtraBold">
+		<item name="android:textColor">?attr/colorSecondaryVariant</item>
+	</style>
+
+	<style name="S34ExtraBoldWhite" parent="S34ExtraBold">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+
+	<style name="S36BoldWhite" parent="S36Bold">
+		<item name="android:textColor">@color/white</item>
 	</style>
 
 </resources>

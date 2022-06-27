@@ -8,12 +8,14 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import com.news24.app.ui.other.transformation.RoundedCornersTransformation
 import java.io.File
 
 object ImageHelper {
@@ -30,49 +32,41 @@ object ImageHelper {
         successAction: () -> Unit = {},
         errorAction: () -> Unit = {}
     ) {
-        Glide.with(imageView.context).clear(imageView)
-
-        val scaleTypeTransform = if (scaleType == CENTER_INSIDE) {
-            CenterInside()
-        } else {
-            CenterCrop()
-        }
+        cancellingLoads(imageView)
 
         var glideRequest = Glide.with(imageView.context).load(url)
+        val scaleTypeTransform = getScaleTypeTransformation(scaleType)
+        val requestOptions = RequestOptions()
+            .transform(scaleTypeTransform)
+            .format(DecodeFormat.PREFER_RGB_565)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .sizeMultiplier(0.75f)
 
-        placeholderResId?.let {
-            glideRequest = glideRequest.placeholder(placeholderResId)
+        val requestListener = object : RequestListener<Drawable> {
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                errorAction()
+                return true
+            }
+
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: Target<Drawable>?,
+                dataSource: DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                successAction()
+                return false
+            }
         }
 
-        glideRequest
-            .apply(RequestOptions()
-                .apply { transform(scaleTypeTransform) }
-                .format(DecodeFormat.PREFER_RGB_565)
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .sizeMultiplier(0.75f))
-            .addListener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    errorAction()
-                    return true
-                }
-
-                override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    successAction()
-                    return false
-                }
-            })
-            .into(imageView)
+        placeholderResId?.let { glideRequest = glideRequest.placeholder(placeholderResId) }
+        glideRequest.apply(requestOptions).addListener(requestListener).into(imageView)
     }
 
     fun loadImageResourceToImageView(
@@ -81,7 +75,7 @@ object ImageHelper {
         scaleType: String? = null,
         successAction: () -> Unit = {}
     ) {
-        Glide.with(imageView.context).clear(imageView)
+        cancellingLoads(imageView)
 
         var glideRequest = Glide.with(imageView.context)
             .load(imageResId)
@@ -93,12 +87,7 @@ object ImageHelper {
                     .optionalCenterInside()
             )
 
-        val scaleTypeTransform = if (scaleType == CENTER_INSIDE) {
-            CenterInside()
-        } else {
-            CenterCrop()
-        }
-
+        val scaleTypeTransform = getScaleTypeTransformation(scaleType)
         var requestOptions = RequestOptions()
             .format(DecodeFormat.PREFER_ARGB_8888)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -106,8 +95,61 @@ object ImageHelper {
         requestOptions = requestOptions.transform(scaleTypeTransform)
         glideRequest = glideRequest.apply(requestOptions)
 
+        val requestListener = object : RequestListener<Drawable> {
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                return true
+            }
+
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: Target<Drawable>?,
+                dataSource: DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                successAction()
+                return false
+            }
+        }
+
         glideRequest
             .transition(DrawableTransitionOptions.withCrossFade(250))
+            .addListener(requestListener)
+            .into(imageView)
+    }
+
+    fun loadImageFileToImageView(
+        imageView: ImageView,
+        imageFile: File,
+        scaleType: String? = null,
+        successAction: () -> Unit = {}
+    ) {
+        cancellingLoads(imageView)
+
+        var glideRequest = Glide.with(imageView.context)
+            .load(imageFile)
+            .apply(
+                RequestOptions()
+                    .transform(CenterCrop())
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .optionalCenterInside()
+            )
+
+        val scaleTypeTransform = getScaleTypeTransformation(scaleType)
+        val requestOptions = RequestOptions()
+            .format(DecodeFormat.PREFER_ARGB_8888)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .transform(scaleTypeTransform)
+
+        glideRequest = glideRequest.apply(requestOptions)
+
+        glideRequest
             .addListener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
                     e: GlideException?,
@@ -131,59 +173,35 @@ object ImageHelper {
             }).into(imageView)
     }
 
-    fun loadImageFileToImageView(
+    fun loadImageWithTypedCornersToImageView(
+        url: String,
         imageView: ImageView,
-        imageFile: File,
+        transformation: RoundedCornersTransformation,
         scaleType: String? = null,
-        successAction: () -> Unit = {}
     ) {
+        cancellingLoads(imageView)
+
+        val glideRequest = Glide.with(imageView.context).load(url)
+        val scaleTypeTransform = getScaleTypeTransformation(scaleType)
+        val requestOptions = RequestOptions()
+            .transform(scaleTypeTransform, transformation)
+            .format(DecodeFormat.PREFER_RGB_565)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .sizeMultiplier(0.75f)
+
+        glideRequest.apply(requestOptions).into(imageView)
+    }
+
+    private fun getScaleTypeTransformation(scaleType: String? = null): BitmapTransformation {
+        return CenterInside().takeIf { scaleType == CENTER_INSIDE } ?: CenterCrop()
+    }
+
+    fun clearResources(imageView: ImageView) {
+        Glide.get(imageView.context).requestManagerRetriever.get(imageView.context).clear(imageView)
+    }
+
+    fun cancellingLoads(imageView: ImageView) {
         Glide.with(imageView.context).clear(imageView)
-
-        var glideRequest = Glide.with(imageView.context)
-            .load(imageFile)
-            .apply(
-                RequestOptions()
-                    .transform(CenterCrop())
-                    .format(DecodeFormat.PREFER_ARGB_8888)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .optionalCenterInside()
-            )
-
-        val scaleTypeTransform = if (scaleType == CENTER_INSIDE) {
-            CenterInside()
-        } else {
-            CenterCrop()
-        }
-
-        var requestOptions = RequestOptions()
-            .format(DecodeFormat.PREFER_ARGB_8888)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-
-        requestOptions = requestOptions.transform(scaleTypeTransform)
-        glideRequest = glideRequest.apply(requestOptions)
-
-        glideRequest
-            .addListener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    return true
-                }
-
-                override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    successAction()
-                    return false
-                }
-            }).into(imageView)
     }
 
 }

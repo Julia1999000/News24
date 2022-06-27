@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.news24.app.R
 import com.news24.app.databinding.ActivitySplashScreenBinding
-import com.news24.app.ui.activity.base.BaseActivity
+import com.news24.app.ui.activity.base.BaseScreenActivity
 import com.news24.app.ui.navigation.ApplicationNavigator
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -15,7 +15,7 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 
-class SplashScreenActivity : BaseActivity(), SplashScreenContract.View {
+class SplashScreenActivity : BaseScreenActivity(), SplashScreenContract.View {
 
 	@InjectPresenter
 	lateinit var presenter: SplashScreenContract.Presenter

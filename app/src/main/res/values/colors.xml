@@ -11,12 +11,16 @@
 	<color name="white">#FFFFFF</color>
 	<color name="white_transparent">#00FFFFFF</color>
 	<color name="white_60_percent_transparent">#99FFFFFF</color>
+	<color name="white_80_percent_transparent">#CCFFFFFF</color>
 	<color name="white_f6">#FAF6F6</color>
 
 	<color name="black">#000000</color>
 	<color name="black_1C">#170A1C</color>
-	<color name="black_transparent_10">#1A000000</color>
+	<color name="black_10_percent_transparent">#1A000000</color>
+	<color name="black_40_percent_transparent">#66000000</color>
+	<color name="black_60_percent_transparent">#99000000</color>
 	<color name="black_3D_40_percent_transparent">#662B193D</color>
+	<color name="black_3D_80_percent_transparent">#CC2B193D</color>
 	<color name="black_3D_transparent">#002B193D</color>
 
 	<color name="yellow_29">#F6CF29</color>

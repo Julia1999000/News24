@@ -3,7 +3,11 @@
 	<string name="app_name">News 24</string>
 	<string name="span_app_name">24</string>
 
-	<string name="common_todo">ещё не реализовано</string>
+	<string name="common_todo">Ещё не реализовано</string>
+	<string name="common_read_further">Читать далее</string>
+	<string name="common_share">Поделиться</string>
+	<string name="common_header">Заголовок</string>
+	<string name="common_top">Топ</string>
 
 	<!-- Welcome -->
 	<string name="welcome_skip">Пропустить</string>
@@ -18,10 +22,10 @@
 	<string name="bottom_navigation_settings">Настройки</string>
 	<string name="bottom_navigation_profile">Профиль</string>
 
-	<string name="test_article_header">заголовок</string>
-
 	<!-- Broadcast -->
 	<string name="live">LIVE</string>
 	<string name="live_end">Трансляция окончена</string>
+
+	<string name="sharing_title">Взгляните на это… 👀</string>
 
 </resources>

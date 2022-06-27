@@ -22,4 +22,28 @@ class ResourceProviderImpl @Inject constructor(private val context: Context): Re
         return DimensHelper.pxToDp(context, context.resources.displayMetrics.widthPixels.toFloat()).toInt()
     }
 
+    override fun getHeightScreenDp(): Int {
+        return DimensHelper.pxToDp(context, context.resources.displayMetrics.heightPixels.toFloat()).toInt()
+    }
+
+    override fun getHeightScreenPx(): Int {
+        return context.resources.displayMetrics.heightPixels
+    }
+
+    override fun getWidthScreenPx(): Int {
+        return context.resources.displayMetrics.widthPixels
+    }
+
+    override fun pxToDp(value: Float): Float {
+        return DimensHelper.pxToDp(context, value)
+    }
+
+    override fun dpToPx(value: Float): Float {
+        return DimensHelper.dpToPx(context, value)
+    }
+
+    override fun dpToPx(value: Int): Int {
+        return DimensHelper.dpToPx(context, value)
+    }
+
 }

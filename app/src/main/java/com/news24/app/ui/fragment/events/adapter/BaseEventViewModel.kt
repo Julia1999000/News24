@@ -18,7 +18,7 @@ interface BaseEventViewModel : ListViewModel {
 
 
 enum class SizeForm {
-	SMALL_FORM,
-	BIG_FORM
+		SMALL_FORM,
+		BIG_FORM
 }
 

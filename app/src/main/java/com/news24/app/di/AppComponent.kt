@@ -10,15 +10,23 @@ import com.news24.app.ui.activity.main.MainScreenComponent
 import com.news24.app.ui.activity.main.MainScreenModule
 import com.news24.app.ui.activity.splash.SplashScreenComponent
 import com.news24.app.ui.activity.splash.SplashScreenModule
-import com.news24.app.ui.fragment.events.EventsScreenComponent
-import com.news24.app.ui.fragment.events.EventsScreenModule
-import com.news24.app.ui.fragment.onboarding.OnboardingScreenComponent
-import com.news24.app.ui.fragment.onboarding.OnboardingScreenModule
-import com.news24.app.ui.fragment.profile.ProfileScreenComponent
-import com.news24.app.ui.fragment.profile.ProfileScreenModule
-import com.news24.app.ui.fragment.settings.SettingsScreenComponent
-import com.news24.app.ui.fragment.settings.SettingsScreenModule
+import com.news24.app.ui.fragment.detail.article.ArticleModule
+import com.news24.app.ui.fragment.detail.article.ArticleComponent
+import com.news24.app.ui.fragment.detail.news.NewsComponent
+import com.news24.app.ui.fragment.detail.news.NewsModule
+import com.news24.app.ui.fragment.events.EventsComponent
+import com.news24.app.ui.fragment.events.EventsModule
+import com.news24.app.ui.fragment.onboarding.OnboardingComponent
+import com.news24.app.ui.fragment.onboarding.OnboardingModule
+import com.news24.app.ui.fragment.preloaderdialog.PreloaderDialogComponent
+import com.news24.app.ui.fragment.preloaderdialog.PreloaderDialogModule
+import com.news24.app.ui.fragment.profile.ProfileComponent
+import com.news24.app.ui.fragment.profile.ProfileModule
+import com.news24.app.ui.fragment.settings.SettingsComponent
+import com.news24.app.ui.fragment.settings.SettingsModule
 import com.news24.app.ui.fragment.tabcontainer.TabContainerFragment
+import com.news24.app.ui.fragment.webview.WebViewComponent
+import com.news24.app.ui.fragment.webview.WebViewModule
 import dagger.Component
 import javax.inject.Singleton
 
@@ -43,12 +51,20 @@ interface AppComponent {
 
     fun plus(module: ContainerScreenModule): ContainerScreenComponent
 
-    fun plus(module: OnboardingScreenModule): OnboardingScreenComponent
+    fun plus(module: OnboardingModule): OnboardingComponent
 
-    fun plus(module: EventsScreenModule): EventsScreenComponent
+    fun plus(module: EventsModule): EventsComponent
 
-    fun plus(module: ProfileScreenModule): ProfileScreenComponent
+    fun plus(module: ProfileModule): ProfileComponent
 
-    fun plus(module: SettingsScreenModule): SettingsScreenComponent
+    fun plus(module: SettingsModule): SettingsComponent
+
+    fun plus(module: ArticleModule): ArticleComponent
+
+    fun plus(module: WebViewModule): WebViewComponent
+
+    fun plus(module: NewsModule): NewsComponent
+
+    fun plus(module: PreloaderDialogModule): PreloaderDialogComponent
 
 }

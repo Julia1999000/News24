@@ -8,6 +8,14 @@ import androidx.core.view.updatePadding
 import com.news24.app.helpers.DimensHelper.dpToPx
 
 
+fun View.setVisibility(isVisible: Boolean) {
+	this.visibility = if (isVisible) {
+		View.VISIBLE
+	} else {
+		View.GONE
+	}
+}
+
 fun View.doOnApplyWindowInsets(f: (View, WindowInsetsCompat, Rect) -> Unit) {
 	val initialPadding = recordInitialPaddingForView(this)
 	ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->

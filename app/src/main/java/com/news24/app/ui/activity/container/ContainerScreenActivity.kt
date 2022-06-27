@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.os.Parcelable
 import com.news24.app.R
 import com.news24.app.components.AppContext
-import com.news24.app.databinding.ActivityFragmentContainerBinding
-import com.news24.app.ui.activity.base.BaseActivity
+import com.news24.app.databinding.ActivityContainerScreenBinding
+import com.news24.app.ui.activity.base.BaseScreenActivity
 import com.news24.app.ui.navigation.ApplicationNavigator
 import com.news24.app.ui.navigation.BackButtonListener
 import moxy.presenter.InjectPresenter
@@ -16,7 +16,7 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 
-class ContainerScreenActivity : BaseActivity(), ContainerScreenContract.View {
+class ContainerScreenActivity : BaseScreenActivity(), ContainerScreenContract.View {
 
 	companion object {
 
@@ -35,7 +35,7 @@ class ContainerScreenActivity : BaseActivity(), ContainerScreenContract.View {
 
 	private val navigator = ApplicationNavigator(this, R.id.contentContainer)
 
-	private lateinit var activityBinding: ActivityFragmentContainerBinding
+	private lateinit var activityBinding: ActivityContainerScreenBinding
 
 
 	//region ==================== Lifecycle callbacks ====================
@@ -43,7 +43,7 @@ class ContainerScreenActivity : BaseActivity(), ContainerScreenContract.View {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		configureDI()
 		super.onCreate(savedInstanceState)
-		activityBinding = ActivityFragmentContainerBinding.inflate(layoutInflater)
+		activityBinding = ActivityContainerScreenBinding.inflate(layoutInflater)
 		setContentView(activityBinding.root)
 	}
 

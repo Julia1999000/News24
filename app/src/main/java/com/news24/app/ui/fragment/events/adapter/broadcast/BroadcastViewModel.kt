@@ -23,6 +23,6 @@ data class BroadcastViewModel(
 
 
 enum class StatusBroadcast {
-	START,
-	END
+		START,
+		END
 }

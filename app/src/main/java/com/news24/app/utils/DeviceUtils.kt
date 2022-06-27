@@ -40,4 +40,11 @@ object DeviceUtils {
 		return result
 	}
 
+	fun getWindowHeight(activity: Activity): Int {
+		val displayMetrics = DisplayMetrics()
+		activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
+		return displayMetrics.heightPixels
+	}
+
+
 }

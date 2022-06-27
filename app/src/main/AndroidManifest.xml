@@ -4,6 +4,7 @@
 	package="com.news24.app">
 
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 	<application
 		android:name=".components.AppContext"
@@ -26,7 +27,7 @@
 		</activity>
 
 		<activity
-			android:name=".ui.activity.main.MainScreenContainerActivity"
+			android:name=".ui.activity.main.MainScreenActivity"
 			android:theme="@style/ScreenTheme"
 			android:windowSoftInputMode="adjustResize"
 			android:screenOrientation="portrait" />
