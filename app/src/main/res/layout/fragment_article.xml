@@ -37,6 +37,14 @@
 
     </com.news24.app.ui.widget.RoundedView>
 
+    <View
+        android:id="@+id/upperFlashingGradient"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/gradient_black_to_transparent"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="@+id/contentContainer" />
+
     <TextView
         android:id="@+id/tvTest"
         style="@style/S34BoldWhite"

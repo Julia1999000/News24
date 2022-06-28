@@ -33,7 +33,7 @@ class TagViewModelDelegate @Inject constructor(
 
     override fun onBindViewHolder(item: TagViewModel, viewHolder: BindingViewHolder<ListItemTagBinding>, payloads: MutableList<Any>) {
         viewHolder.itemViewBinding.apply {
-           ImageHelper.loadImageByUrlToImageView(item.image, ivTagImage, ImageHelper.CENTER_CROP, R.color.grey_F3)
+           ImageHelper.loadImageByUrlToImageView(item.image, ivTagImage, ImageHelper.CENTER_CROP, R.color.transparent)
         }
     }
 

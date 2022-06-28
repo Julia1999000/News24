@@ -22,10 +22,6 @@ interface NewsContract {
         @StateStrategyType(OneExecutionStateStrategy::class)
         fun shareNews(url: String)
 
-        fun hideGradientBottom()
-
-        fun showGradientBottom()
-
     }
 
 
@@ -36,8 +32,6 @@ interface NewsContract {
         abstract fun onShareClicked()
 
         abstract fun onReadFurtherClicked()
-
-        abstract fun onScrollChange(lastVisibleItemPosition: Int)
 
         abstract fun setHeightListViewModel(heightHeaderPx: Int, heightBackPx: Int)
 

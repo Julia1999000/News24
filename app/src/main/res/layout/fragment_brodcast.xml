@@ -37,6 +37,16 @@
 
     </com.news24.app.ui.widget.RoundedView>
 
+    <TextView
+        android:id="@+id/tvTest"
+        style="@style/S30BoldWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/content_horizontal_padding"
+        android:paddingBottom="10dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/bottomPanel" />
+
     <View
         android:id="@+id/upperFlashingGradient"
         android:layout_width="match_parent"
@@ -45,15 +55,12 @@
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="@+id/contentContainer" />
 
-    <TextView
-        android:id="@+id/tvTest"
-        style="@style/S36BoldWhite"
+
+    <com.news24.app.ui.widget.StatusBroadcastView
+        android:id="@+id/statusView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/content_horizontal_padding"
-        android:paddingBottom="10dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/bottomPanel" />
+        app:layout_constraintTop_toTopOf="@id/contentContainer" />
 
     <View
         android:id="@+id/lowerFlashingGradient"

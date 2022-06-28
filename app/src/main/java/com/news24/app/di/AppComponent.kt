@@ -12,6 +12,8 @@ import com.news24.app.ui.activity.splash.SplashScreenComponent
 import com.news24.app.ui.activity.splash.SplashScreenModule
 import com.news24.app.ui.fragment.detail.article.ArticleModule
 import com.news24.app.ui.fragment.detail.article.ArticleComponent
+import com.news24.app.ui.fragment.detail.broadcast.BroadcastComponent
+import com.news24.app.ui.fragment.detail.broadcast.BroadcastModule
 import com.news24.app.ui.fragment.detail.news.NewsComponent
 import com.news24.app.ui.fragment.detail.news.NewsModule
 import com.news24.app.ui.fragment.events.EventsComponent
@@ -66,5 +68,7 @@ interface AppComponent {
     fun plus(module: NewsModule): NewsComponent
 
     fun plus(module: PreloaderDialogModule): PreloaderDialogComponent
+
+    fun plus(module: BroadcastModule): BroadcastComponent
 
 }

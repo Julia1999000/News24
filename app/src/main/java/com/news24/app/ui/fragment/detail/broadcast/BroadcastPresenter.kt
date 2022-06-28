@@ -1,4 +1,4 @@
-package com.news24.app.ui.fragment.detail.article
+package com.news24.app.ui.fragment.detail.broadcast
 
 import com.news24.app.R
 import com.news24.app.data.entities.events.model.ContentType
@@ -6,31 +6,31 @@ import com.news24.app.helpers.FormatHelper
 import com.news24.app.ui.adapter.ListViewModel
 import com.news24.app.ui.adapter.delegates.separator.SeparatorViewModel
 import com.news24.app.ui.adapter.delegates.textview.TextViewModel
-import com.news24.app.ui.fragment.detail.article.model.ArticleScreenParams
+import com.news24.app.ui.fragment.detail.broadcast.model.BroadcastScreenParams
 import com.news24.app.ui.fragment.detail.news.adapter.tagscontainer.TagsContainerViewModel
 import com.news24.app.ui.fragment.webview.model.WebViewParams
 import com.news24.app.ui.navigation.Screens
 import com.news24.app.ui.other.resources.ResourceProvider
 import ru.terrakok.cicerone.Router
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 
 
-class ArticlePresenter @Inject constructor(
+class BroadcastPresenter @Inject constructor(
         private val router: Router,
-        private val params: ArticleScreenParams,
+        private val params: BroadcastScreenParams,
         private val resourceProvider: ResourceProvider
-) : ArticleContract.Presenter() {
+): BroadcastContract.Presenter() {
 
     private var headerViewModelHeightPx = 0
     private var backgroundHeightPx = 0
     private var viewModels: List<ListViewModel> = emptyList()
 
     companion object {
-        private const val OFFSET_10_DP = 10
-        private const val OFFSET_16_DP = 16
         private const val TAGS_VIEW_MODEL_ID = "TAGS_VIEW_MODEL_ID"
         private const val PERCENT_TAG_HEIGHT = 0.095F
+        private const val OFFSET_10_DP = 10
+        private const val OFFSET_16_DP = 16
     }
 
     //region ===================== MVP Presenter ======================
@@ -38,14 +38,16 @@ class ArticlePresenter @Inject constructor(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        viewState.showBackground(params.image ?: params.backgroundImage)
+        viewState.showBackground(params.backgroundImage)
+        viewState.showLogoOfBroadcast(params.live)
+
         viewState.setTestHeader(params.title)
     }
 
     //endregion
 
 
-    //region ==================== ArticleContract.Presenter ====================
+    //region ==================== BroadcastContract.Presenter ====================
 
     override fun onBackClicked() {
         router.exit()
@@ -56,7 +58,7 @@ class ArticlePresenter @Inject constructor(
     }
 
     override fun onShareClicked() {
-        viewState.shareArticle(params.url)
+        viewState.shareBroadcast(params.url)
     }
 
     override fun setHeightListViewModel(heightHeaderPx: Int, heightBackPx: Int) {
@@ -65,7 +67,6 @@ class ArticlePresenter @Inject constructor(
 
         viewState.showData(createListViewModel())
     }
-
 
     //endregion
 
@@ -80,37 +81,39 @@ class ArticlePresenter @Inject constructor(
         listViewModel.add(SeparatorViewModel(R.color.transparent, emptyViewHeightDp.toInt()))
         listViewModel.add(TagsContainerViewModel(TAGS_VIEW_MODEL_ID, params.tags, tagsContainerHeightPx.toInt()))
         listViewModel.add(createHeaderViewModel())
-        listViewModel.add(createPublishDateViewModel())
         listViewModel.addAll(createListContentViewModel())
 
         viewModels = listViewModel
         return listViewModel
     }
 
-
-    private fun createListContentViewModel(): ArrayList<ListViewModel> {
-        val listViewModel = ArrayList<ListViewModel>()
-        params.content.forEach { item ->
-            listViewModel.add(SeparatorViewModel(R.color.black, OFFSET_10_DP))
-            listViewModel.add(createTextContent(item.content, item.type))
-        }
-
-        return listViewModel
-    }
-
     private fun createHeaderViewModel(): ListViewModel {
         return TextViewModel(
             text = params.title,
-            styleId = R.style.S34BoldWhite,
+            styleId = R.style.S30BoldWhite,
             horizontalPaddingDp = OFFSET_16_DP,
             backgroundId = R.drawable.gradient_transparent_to_black,
             bottomPaddingDp = OFFSET_10_DP
         )
     }
 
-    private fun createPublishDateViewModel(): ListViewModel {
+    private fun createListContentViewModel(): ArrayList<ListViewModel> {
+        val listViewModel = ArrayList<ListViewModel>()
+        params.liveEvents.forEach {
+            listViewModel.add(SeparatorViewModel(R.color.black, OFFSET_10_DP))
+            listViewModel.add(createPublishDateViewModel(it.publishDate))
+            it.content.forEach { content ->
+                listViewModel.add(SeparatorViewModel(R.color.black, OFFSET_10_DP))
+                listViewModel.add(createTextContent(content.content, content.type))
+            }
+        }
+
+        return listViewModel
+    }
+
+    private fun createPublishDateViewModel(publishDate: Date): ListViewModel {
         return TextViewModel(
-            text = FormatHelper.getFormattedTime(params.publishDate),
+            text = FormatHelper.getFormattedTime(publishDate),
             styleId = R.style.S14RegularWhite,
             horizontalPaddingDp = OFFSET_16_DP,
             backgroundId = R.color.black

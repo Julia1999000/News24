@@ -98,10 +98,17 @@ class NewsFragment: BaseFragment(), NewsContract.View {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
 
-            fragmentBinding.rvContent.let {
-                val layoutManager = fragmentBinding.rvContent.layoutManager as LinearLayoutManager
+            fragmentBinding.apply {
+                val layoutManager = rvContent.layoutManager as LinearLayoutManager
                 val lastVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition()
-                presenter.onScrollChange(lastVisibleItemPosition)
+                if (lastVisibleItemPosition  > 0 && lastVisibleItemPosition >= adapter.itemCount - 1) {
+                    hideGradientBottom()
+                } else {
+                    showGradientBottom()
+                }
+
+                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+                upperFlashingGradient.setVisibility(firstVisibleItemPosition > 0)
             }
         }
     }
@@ -125,14 +132,6 @@ class NewsFragment: BaseFragment(), NewsContract.View {
 
     override fun shareNews(url: String) {
         showShareDialog(url)
-    }
-
-    override fun hideGradientBottom() {
-        fragmentBinding.lowerFlashingGradient.setVisibility(false)
-    }
-
-    override fun showGradientBottom() {
-        fragmentBinding.lowerFlashingGradient.setVisibility(true)
     }
 
     //endregion
@@ -179,11 +178,13 @@ class NewsFragment: BaseFragment(), NewsContract.View {
         }
     }
 
-    //endregion
+    private fun hideGradientBottom() {
+        fragmentBinding.lowerFlashingGradient.setVisibility(false)
+    }
 
-
-    //region ===================== Internal ======================
-
+    private fun showGradientBottom() {
+        fragmentBinding.lowerFlashingGradient.setVisibility(true)
+    }
 
     //endregion
 

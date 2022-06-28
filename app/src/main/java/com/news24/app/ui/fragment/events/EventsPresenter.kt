@@ -1,17 +1,22 @@
 package com.news24.app.ui.fragment.events
 
 import com.news24.app.data.entities.events.model.Event
+import com.news24.app.data.entities.events.model.EventDataArticle
+import com.news24.app.data.entities.events.model.EventDataBroadcast
+import com.news24.app.data.entities.events.model.EventDataNews
 import com.news24.app.data.entities.events.paginator.EventsPaginator
 import com.news24.app.data.entities.events.paginator.PaginatorEvent
 import com.news24.app.di.NamedDependencies
 import com.news24.app.ui.adapter.ListViewModel
 import com.news24.app.ui.fragment.detail.article.model.ArticleScreenParams
+import com.news24.app.ui.fragment.detail.broadcast.model.BroadcastScreenParams
 import com.news24.app.ui.fragment.detail.news.model.NewsScreenParams
 import com.news24.app.ui.fragment.events.adapter.BaseEventViewModel
 import com.news24.app.ui.fragment.events.adapter.EventViewModelFactory
 import com.news24.app.ui.fragment.events.adapter.SizeForm
 import com.news24.app.ui.fragment.events.adapter.article.ArticleViewModel
 import com.news24.app.ui.fragment.events.adapter.broadcast.BroadcastViewModel
+import com.news24.app.ui.fragment.events.adapter.broadcast.StatusBroadcast
 import com.news24.app.ui.fragment.events.adapter.news.NewsViewModel
 import com.news24.app.ui.fragment.events.adapter.photoalbum.PhotoAlbumViewModel
 import com.news24.app.ui.navigation.Screens
@@ -22,7 +27,7 @@ import io.reactivex.schedulers.Schedulers
 import moxy.InjectViewState
 import ru.terrakok.cicerone.Router
 import timber.log.Timber
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -70,12 +75,14 @@ class EventsPresenter @Inject constructor(
 		events.find { item.listItemId == it.id }?.let { event ->
 			when(item) {
 				is ArticleViewModel -> {
-					router.navigateTo(Screens.ContainerScreen(Screens.ArticleScreen(ArticleScreenParams(event))))
+					router.navigateTo(Screens.ContainerScreen(Screens.ArticleScreen(createArticleScreenParams(event))))
 				}
 				is NewsViewModel -> {
-					router.navigateTo(Screens.ContainerScreen(Screens.NewsScreen(NewsScreenParams(event))))
+					router.navigateTo(Screens.ContainerScreen(Screens.NewsScreen(createNewsScreenParams(event))))
 				}
-				is BroadcastViewModel -> {}
+				is BroadcastViewModel -> {
+					router.navigateTo(Screens.ContainerScreen(Screens.BroadcastScreen(createBroadcastScreenParams(event))))
+				}
 				is PhotoAlbumViewModel -> {}
 				// TODO router.navigateTo(Screens ...)
 			}
@@ -171,6 +178,48 @@ class EventsPresenter @Inject constructor(
 
 	private fun isHasThresholdBeenReached(): Boolean {
 		return lastVisibleItemPosition > 0 && lastVisibleItemPosition >= eventsViewModels.size - LOAD_ADDITIONAL_ITEMS_THRESHOLD
+	}
+
+	private fun createArticleScreenParams(event: Event): ArticleScreenParams {
+		event.data as EventDataArticle
+		return ArticleScreenParams(
+			url =  event.url,
+			id = event.id,
+			publishDate = event.publishDate,
+			backgroundImage = event.data.backgroundImage,
+			title = event.data.title,
+			tags = event.data.tags,
+			image = event.data.image,
+			content =  event.data.content
+		)
+	}
+
+	private fun createNewsScreenParams(event: Event): NewsScreenParams {
+		event.data as EventDataNews
+		return NewsScreenParams(
+			url =  event.url,
+			id = event.id,
+			publishDate = event.publishDate,
+			backgroundImage = event.data.backgroundImage,
+			title = event.data.title,
+			tags = event.data.tags,
+			image = event.data.image,
+			content =  event.data.content
+		)
+	}
+
+	private fun createBroadcastScreenParams(event: Event): BroadcastScreenParams {
+		event.data as EventDataBroadcast
+		return BroadcastScreenParams(
+			url =  event.url,
+			id = event.id,
+			publishDate = event.publishDate,
+			backgroundImage = event.data.backgroundImage,
+			title = event.data.title,
+			tags = event.data.tags,
+			liveEvents = event.data.liveEvents,
+			live = StatusBroadcast.START.takeIf { event.data.live } ?: StatusBroadcast.END
+		)
 	}
 
 	//endregion

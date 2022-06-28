@@ -6,6 +6,7 @@ import com.news24.app.helpers.FormatHelper
 import com.news24.app.ui.adapter.ListViewModel
 import com.news24.app.ui.adapter.delegates.separator.SeparatorViewModel
 import com.news24.app.ui.adapter.delegates.textview.TextViewModel
+import com.news24.app.ui.fragment.detail.broadcast.BroadcastPresenter
 import com.news24.app.ui.fragment.detail.news.adapter.tagscontainer.TagsContainerViewModel
 import com.news24.app.ui.fragment.detail.news.model.NewsScreenParams
 import com.news24.app.ui.fragment.webview.model.WebViewParams
@@ -59,14 +60,6 @@ class NewsPresenter @Inject constructor(
         viewState.shareNews(params.url)
     }
 
-    override fun onScrollChange(lastVisibleItemPosition: Int) {
-        if (lastVisibleItemPosition  > 0 && lastVisibleItemPosition >= viewModels.lastIndex) {
-            viewState.hideGradientBottom()
-        } else {
-           viewState.showGradientBottom()
-        }
-    }
-
     override fun setHeightListViewModel(heightHeaderPx: Int, heightBackPx: Int) {
         headerViewModelHeightPx = heightHeaderPx
         backgroundHeightPx = heightBackPx
@@ -99,13 +92,7 @@ class NewsPresenter @Inject constructor(
         val listViewModel = ArrayList<ListViewModel>()
         params.content.forEach { item ->
             listViewModel.add(SeparatorViewModel(R.color.black, OFFSET_10_DP))
-            listViewModel.add(TextViewModel(
-                text = item.content,
-                styleId = R.style.S18SemiBoldWhite.takeIf { item.type == ContentType.HEADER }
-                    ?: R.style.S16RegularWhite,
-                horizontalPaddingDp = OFFSET_16_DP,
-                backgroundId = R.color.black
-            ))
+            listViewModel.add(createTextContent(item.content, item.type))
         }
 
         return listViewModel
@@ -125,6 +112,16 @@ class NewsPresenter @Inject constructor(
         return TextViewModel(
             text = FormatHelper.getFormattedTime(params.publishDate),
             styleId = R.style.S14RegularWhite,
+            horizontalPaddingDp = OFFSET_16_DP,
+            backgroundId = R.color.black
+        )
+    }
+
+    private fun createTextContent(text: String, type: ContentType): TextViewModel {
+        return TextViewModel(
+            text = text,
+            styleId = R.style.S18SemiBoldWhite.takeIf { type == ContentType.HEADER }
+                ?: R.style.S16RegularWhite,
             horizontalPaddingDp = OFFSET_16_DP,
             backgroundId = R.color.black
         )

@@ -8,6 +8,8 @@ import com.news24.app.ui.activity.container.ContainerScreenActivity
 import com.news24.app.ui.activity.main.MainScreenActivity
 import com.news24.app.ui.fragment.detail.article.ArticleFragment
 import com.news24.app.ui.fragment.detail.article.model.ArticleScreenParams
+import com.news24.app.ui.fragment.detail.broadcast.BroadcastFragment
+import com.news24.app.ui.fragment.detail.broadcast.model.BroadcastScreenParams
 import com.news24.app.ui.fragment.detail.news.NewsFragment
 import com.news24.app.ui.fragment.detail.news.model.NewsScreenParams
 import com.news24.app.ui.fragment.events.EventsFragment
@@ -85,6 +87,13 @@ object Screens {
 	class NewsScreen(val params: NewsScreenParams) : SupportAppScreen(), Parcelable {
 		override fun getFragment(): Fragment {
 			return NewsFragment.newInstance(params)
+		}
+	}
+
+	@Parcelize
+	class BroadcastScreen(val params: BroadcastScreenParams) : SupportAppScreen(), Parcelable {
+		override fun getFragment(): Fragment {
+			return BroadcastFragment.newInstance(params)
 		}
 	}
 

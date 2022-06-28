@@ -36,6 +36,10 @@
 		<item name="android:textSize">@dimen/S24</item>
 	</style>
 
+	<style name="S30" parent="BaseTextStyle">
+		<item name="android:textSize">@dimen/S30</item>
+	</style>
+
 	<style name="S34" parent="BaseTextStyle">
 		<item name="android:textSize">@dimen/S34</item>
 	</style>
@@ -147,6 +151,22 @@
 	</style>
 
 	<style name="S24ExtraBold" parent="S24">
+		<item name="android:fontFamily">@font/nunito_extra_bold</item>
+	</style>
+
+	<style name="S30Regular" parent="S30">
+		<item name="android:fontFamily">@font/nunito_regular</item>
+	</style>
+
+	<style name="S30SemiBold" parent="S30">
+		<item name="android:fontFamily">@font/nunito_semibold</item>
+	</style>
+
+	<style name="S30Bold" parent="S30">
+		<item name="android:fontFamily">@font/nunito_bold</item>
+	</style>
+
+	<style name="S30ExtraBold" parent="S30">
 		<item name="android:fontFamily">@font/nunito_extra_bold</item>
 	</style>
 
@@ -268,6 +288,11 @@
 
 	<style name="S24ExtraBoldBlackOrWhite" parent="S24ExtraBold">
 		<item name="android:textColor">?attr/colorSecondaryVariant</item>
+	</style>
+
+
+	<style name="S30BoldWhite" parent="S30Bold">
+		<item name="android:textColor">@color/white</item>
 	</style>
 
 
