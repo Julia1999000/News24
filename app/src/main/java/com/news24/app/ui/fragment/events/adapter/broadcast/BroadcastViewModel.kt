@@ -15,9 +15,7 @@ data class BroadcastViewModel(
 
 	override var sizeForm: SizeForm = SizeForm.BIG_FORM
 
-	override fun getSpanSize(): Int {
-		return BaseEventViewModel.BIG_SPAN
-	}
+	override var spanSize: Int = BaseEventViewModel.BIG_SPAN
 
 }
 

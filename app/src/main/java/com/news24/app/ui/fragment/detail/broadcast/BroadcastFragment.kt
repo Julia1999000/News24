@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnLayout
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.news24.app.R
 import com.news24.app.databinding.FragmentBrodcastBinding
+import com.news24.app.extensions.shared.doOnApplyWindowInsets
 import com.news24.app.extensions.shared.setVisibility
 import com.news24.app.helpers.DimensHelper.dpToPx
+import com.news24.app.helpers.DimensHelper.pxToDp
 import com.news24.app.helpers.ImageHelper
 import com.news24.app.helpers.SpanTextHelper
 import com.news24.app.ui.adapter.ListViewModel
@@ -23,6 +27,7 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 import javax.inject.Provider
+
 
 class BroadcastFragment: BaseFragment(), BroadcastContract.View {
 
@@ -176,8 +181,13 @@ class BroadcastFragment: BaseFragment(), BroadcastContract.View {
             rvContent.addOnScrollListener(scrollChangedListener)
 
             bottomPanel.listener = actionPanelListener
+            bottomPanel.doOnApplyWindowInsets { view, insets, padding ->
+                bottomPanel.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    this.bottomMargin = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+                }
+            }
             bottomPanel.doOnLayout {
-                presenter.setHeightListViewModel(tvTest.height, ivBackground.height)
+                presenter.setOffset(tvTest.height.pxToDp(requireContext()), ivBackground.height.pxToDp(requireContext()))
             }
         }
     }

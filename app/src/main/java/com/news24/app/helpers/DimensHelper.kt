@@ -11,7 +11,15 @@ object DimensHelper {
     }
 
     fun dpToPx(context: Context, value: Int): Int {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value.toFloat(), context.resources.displayMetrics).toInt()
+        return dpToPx(context, value.toFloat()).toInt()
+    }
+
+    fun Int.dpToPx(context: Context): Int {
+        return dpToPx(context, this.toFloat()).toInt()
+    }
+
+    fun Float.dpToPx(context: Context): Float {
+        return dpToPx(context, this)
     }
 
     fun pxToDp(context: Context, value: Float): Float {
@@ -19,10 +27,16 @@ object DimensHelper {
         return value / (metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
     }
 
-    fun Int.dpToPx(context: Context): Int {
-        return TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), context.resources.displayMetrics
-        ).toInt()
+    fun pxToDp(context: Context, value: Int): Int {
+        return pxToDp(context, value.toFloat()).toInt()
+    }
+
+    fun Int.pxToDp(context: Context): Int {
+        return pxToDp(context, this.toFloat()).toInt()
+    }
+
+    fun Float.pxToDp(context: Context): Float {
+        return pxToDp(context, this)
     }
 
 }

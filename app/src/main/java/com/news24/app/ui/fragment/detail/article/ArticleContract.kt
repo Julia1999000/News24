@@ -33,7 +33,7 @@ interface ArticleContract {
 
         abstract fun onReadFurtherClicked()
 
-        abstract fun setHeightListViewModel(heightHeaderPx: Int, heightBackPx: Int)
+        abstract fun setOffset(heightHeaderDp: Int, heightBackDp: Int)
 
     }
 

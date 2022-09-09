@@ -1,13 +1,11 @@
 package com.news24.app.ui.fragment.events.adapter
 
-import com.news24.app.ui.adapter.ListViewModel
+import com.news24.app.ui.adapter.GridListViewModel
 
 
-interface BaseEventViewModel : ListViewModel {
+interface BaseEventViewModel : GridListViewModel {
 
 	var sizeForm: SizeForm
-
-	fun getSpanSize(): Int
 
 	companion object {
 		const val SMALL_SPAN = 1

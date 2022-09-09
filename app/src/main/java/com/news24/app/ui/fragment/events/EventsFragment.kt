@@ -10,13 +10,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.news24.app.R
 import com.news24.app.databinding.FragmentEventsBinding
-import com.news24.app.helpers.DimensHelper.dpToPx
 import com.news24.app.helpers.SpanTextHelper
+import com.news24.app.ui.adapter.GridListViewModel
 import com.news24.app.ui.adapter.ListViewModel
 import com.news24.app.ui.adapter.listener.ListItemClickListener
 import com.news24.app.ui.fragment.base.BaseFragment
-import com.news24.app.ui.fragment.events.adapter.BaseEventViewModel
-import com.news24.app.ui.adapter.ItemDecorator
 import com.news24.app.ui.fragment.base.view.FragmentWithPreloader
 import com.news24.app.ui.fragment.events.adapter.EventsAdapter
 import moxy.presenter.InjectPresenter
@@ -38,14 +36,10 @@ class EventsFragment : BaseFragment(), EventsContract.View, FragmentWithPreloade
 	@Inject
 	lateinit var adapter: EventsAdapter
 
-	@Inject
-	lateinit var itemDecorator: ItemDecorator
-
 	//region ==================== Fragment creation ====================
 
 	companion object {
 		const val EVENTS_COLUMNS_COUNT = 2
-		const val EVENT_ITEM_OFFSET_DECORATION_DP = 1
 
 		fun newInstance(): EventsFragment {
 			val args = Bundle()
@@ -89,7 +83,7 @@ class EventsFragment : BaseFragment(), EventsContract.View, FragmentWithPreloade
 
 	private val onEventsSpanSizeProvider = object: GridLayoutManager.SpanSizeLookup() {
 		override fun getSpanSize(position: Int): Int {
-			return (adapter.items[position] as? BaseEventViewModel)?.getSpanSize() ?: 0
+			return (adapter.items[position] as? GridListViewModel)?.spanSize ?: 0
 		}
 	}
 
@@ -144,10 +138,6 @@ class EventsFragment : BaseFragment(), EventsContract.View, FragmentWithPreloade
 		fragmentBinding.apply {
 			val gridLayoutManager =  GridLayoutManager(context, EVENTS_COLUMNS_COUNT)
 			gridLayoutManager.spanSizeLookup = onEventsSpanSizeProvider
-			if (rvEvents.itemDecorationCount < 1) {
-				itemDecorator.itemOffset = EVENT_ITEM_OFFSET_DECORATION_DP.dpToPx(requireActivity())
-				rvEvents.addItemDecoration(itemDecorator)
-			}
 			rvEvents.layoutManager = gridLayoutManager
 			rvEvents.adapter = adapter
 			rvEvents.addOnScrollListener(onEventsScrollListener)

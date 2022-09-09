@@ -9,5 +9,5 @@ import com.news24.app.ui.adapter.ListViewModel
 data class TagsContainerViewModel(
         override var listItemId: String?,
         var listTags: List<EventTag>,
-        var heightPx: Int
+        var heightDp: Int
 ): ListViewModel

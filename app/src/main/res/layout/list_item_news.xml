@@ -1,56 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="0dp"
-    tools:ignore="ContentDescription">
+    android:layout_height="wrap_content">
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmerContainer"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:shimmer_auto_start="true">
+        android:layout_margin="1dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        tools:ignore="ContentDescription">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/contentContainer"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:shimmer_auto_start="true">
 
-            <ImageView
-                android:id="@+id/ivBackground"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/contentContainer"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="175:290"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_test_event_background" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tvHeader"
-                style="@style/S16BoldWhite"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/gradient_transparent_to_black_3d_40_trans"
-                android:ellipsize="end"
-                android:gravity="bottom"
-                android:lineSpacingExtra="2sp"
-                android:maxLines="6"
-                android:paddingHorizontal="14dp"
-                android:paddingBottom="14dp"
-                android:singleLine="false"
-                android:translationY="1.2sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="@string/common_header" />
+                <ImageView
+                    android:id="@+id/ivBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="175:290"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_test_event_background" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvHeader"
+                    style="@style/S16BoldWhite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_transparent_to_black_3d_40_trans"
+                    android:ellipsize="end"
+                    android:gravity="bottom"
+                    android:lineSpacingExtra="2sp"
+                    android:maxLines="6"
+                    android:paddingHorizontal="14dp"
+                    android:paddingBottom="14dp"
+                    android:singleLine="false"
+                    android:translationY="1.2sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="@string/common_header" />
 
-    </com.facebook.shimmer.ShimmerFrameLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

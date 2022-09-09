@@ -65,10 +65,12 @@ class PhotoAlbumViewModelDelegate @Inject constructor(
 			tvCountPhotos.text = item.countPhoto.toString()
 			tvHeaderPhotoAlbum.text = item.title
 			with(ImageHelper) {
-				loadImageByUrlToImageView(item.photoList[0], ivImgPhotoAlbum, CENTER_CROP,
-					R.color.grey_79, successAction = { shimmerContainer.hideShimmer() })
-				loadImageByUrlToImageView(item.photoList[1], ivBackPhotoAlbumCenter, CENTER_CROP, R.color.grey_79)
-				loadImageByUrlToImageView(item.photoList[2], ivBackPhotoAlbumLast, CENTER_CROP, R.color.grey_79)
+				loadImageByUrlToImageView(item.photoList.elementAtOrElse(0) { item.img },
+					ivImgPhotoAlbum, CENTER_CROP, R.color.grey_79, successAction = { shimmerContainer.hideShimmer() })
+				loadImageByUrlToImageView(item.photoList.elementAtOrElse(1) { item.img },
+					ivBackPhotoAlbumCenter, CENTER_CROP, R.color.grey_79)
+				loadImageByUrlToImageView(item.photoList.elementAtOrElse(2) { item.img },
+					ivBackPhotoAlbumLast, CENTER_CROP, R.color.grey_79)
 			}
 		}
 	}

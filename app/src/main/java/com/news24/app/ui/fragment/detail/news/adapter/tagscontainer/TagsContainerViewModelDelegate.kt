@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import com.news24.app.databinding.ListItemTagsContainerBinding
 import com.news24.app.di.NamedDependencies
+import com.news24.app.helpers.DimensHelper.dpToPx
 import com.news24.app.ui.adapter.BindingViewHolder
 import com.news24.app.ui.adapter.ListViewModel
 import com.news24.app.ui.fragment.detail.news.adapter.tagscontainer.tags.TagViewModel
@@ -18,7 +19,7 @@ import javax.inject.Named
 
 
 class TagsContainerViewModelDelegate @Inject constructor(
-    @Named(NamedDependencies.ACTIVITY_CONTEXT) private val context: Context
+        @Named(NamedDependencies.ACTIVITY_CONTEXT) private val context: Context
 ) : AbsListItemAdapterDelegate<TagsContainerViewModel, ListViewModel, BindingViewHolder<ListItemTagsContainerBinding>>() {
 
     private val layoutInflater = LayoutInflater.from(context)
@@ -42,7 +43,7 @@ class TagsContainerViewModelDelegate @Inject constructor(
             rvTags.adapter = adapter
 
             rvTags.updateLayoutParams {
-                height = item.heightPx
+                height = item.heightDp.dpToPx(context)
             }
 
             val viewModels = arrayListOf<ListViewModel>()

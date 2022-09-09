@@ -10,7 +10,7 @@ import com.news24.app.ui.fragment.detail.broadcast.model.BroadcastScreenParams
 import com.news24.app.ui.fragment.detail.news.adapter.tagscontainer.TagsContainerViewModel
 import com.news24.app.ui.fragment.webview.model.WebViewParams
 import com.news24.app.ui.navigation.Screens
-import com.news24.app.ui.other.resources.ResourceProvider
+import com.news24.app.ui.other.device.DeviceProvider
 import ru.terrakok.cicerone.Router
 import java.util.*
 import javax.inject.Inject
@@ -19,11 +19,11 @@ import javax.inject.Inject
 class BroadcastPresenter @Inject constructor(
         private val router: Router,
         private val params: BroadcastScreenParams,
-        private val resourceProvider: ResourceProvider
+        private val deviceProvider: DeviceProvider
 ): BroadcastContract.Presenter() {
 
-    private var headerViewModelHeightPx = 0
-    private var backgroundHeightPx = 0
+    private var headerViewModelHeightDp = 0
+    private var backgroundHeightDp = 0
     private var viewModels: List<ListViewModel> = emptyList()
 
     companion object {
@@ -61,9 +61,9 @@ class BroadcastPresenter @Inject constructor(
         viewState.shareBroadcast(params.url)
     }
 
-    override fun setHeightListViewModel(heightHeaderPx: Int, heightBackPx: Int) {
-        headerViewModelHeightPx = heightHeaderPx
-        backgroundHeightPx = heightBackPx
+    override fun setOffset(heightHeaderDp: Int, heightBackDp: Int) {
+        headerViewModelHeightDp = heightHeaderDp
+        backgroundHeightDp = heightBackDp
 
         viewState.showData(createListViewModel())
     }
@@ -75,11 +75,11 @@ class BroadcastPresenter @Inject constructor(
 
     private fun createListViewModel(): ArrayList<ListViewModel> {
         val listViewModel = ArrayList<ListViewModel>()
-        val tagsContainerHeightPx = resourceProvider.getHeightScreenPx() * PERCENT_TAG_HEIGHT
-        val emptyViewHeightDp = resourceProvider.pxToDp(backgroundHeightPx - headerViewModelHeightPx - tagsContainerHeightPx)
+        val tagsContainerHeightDp = deviceProvider.getHeightScreenDp() * PERCENT_TAG_HEIGHT
+        val emptyViewHeightDp = backgroundHeightDp - headerViewModelHeightDp - tagsContainerHeightDp
 
         listViewModel.add(SeparatorViewModel(R.color.transparent, emptyViewHeightDp.toInt()))
-        listViewModel.add(TagsContainerViewModel(TAGS_VIEW_MODEL_ID, params.tags, tagsContainerHeightPx.toInt()))
+        listViewModel.add(TagsContainerViewModel(TAGS_VIEW_MODEL_ID, params.tags, tagsContainerHeightDp.toInt()))
         listViewModel.add(createHeaderViewModel())
         listViewModel.addAll(createListContentViewModel())
 

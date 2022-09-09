@@ -1,9 +1,6 @@
 package com.news24.app.ui.fragment.events
 
-import com.news24.app.data.entities.events.model.Event
-import com.news24.app.data.entities.events.model.EventDataArticle
-import com.news24.app.data.entities.events.model.EventDataBroadcast
-import com.news24.app.data.entities.events.model.EventDataNews
+import com.news24.app.data.entities.events.model.*
 import com.news24.app.data.entities.events.paginator.EventsPaginator
 import com.news24.app.data.entities.events.paginator.PaginatorEvent
 import com.news24.app.di.NamedDependencies
@@ -11,6 +8,7 @@ import com.news24.app.ui.adapter.ListViewModel
 import com.news24.app.ui.fragment.detail.article.model.ArticleScreenParams
 import com.news24.app.ui.fragment.detail.broadcast.model.BroadcastScreenParams
 import com.news24.app.ui.fragment.detail.news.model.NewsScreenParams
+import com.news24.app.ui.fragment.detail.photoalbum.model.PhotoAlbumScreenParams
 import com.news24.app.ui.fragment.events.adapter.BaseEventViewModel
 import com.news24.app.ui.fragment.events.adapter.EventViewModelFactory
 import com.news24.app.ui.fragment.events.adapter.SizeForm
@@ -20,7 +18,6 @@ import com.news24.app.ui.fragment.events.adapter.broadcast.StatusBroadcast
 import com.news24.app.ui.fragment.events.adapter.news.NewsViewModel
 import com.news24.app.ui.fragment.events.adapter.photoalbum.PhotoAlbumViewModel
 import com.news24.app.ui.navigation.Screens
-import com.news24.app.ui.other.resources.ResourceProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -35,8 +32,7 @@ import javax.inject.Named
 @InjectViewState
 class EventsPresenter @Inject constructor(
 		@Named(NamedDependencies.TAB_ROUTER) private val router: Router,
-		private val eventsPaginator: EventsPaginator,
-		private val resourceProvider: ResourceProvider
+		private val eventsPaginator: EventsPaginator
 ) : EventsContract.Presenter() {
 
 	private var events: List<Event> = listOf()
@@ -83,8 +79,9 @@ class EventsPresenter @Inject constructor(
 				is BroadcastViewModel -> {
 					router.navigateTo(Screens.ContainerScreen(Screens.BroadcastScreen(createBroadcastScreenParams(event))))
 				}
-				is PhotoAlbumViewModel -> {}
-				// TODO router.navigateTo(Screens ...)
+				is PhotoAlbumViewModel -> {
+					router.navigateTo(Screens.ContainerScreen(Screens.PhotoAlbumScreen(createPhotoAlbumScreenParams(event))))
+				}
 			}
 		}
 	}
@@ -219,6 +216,18 @@ class EventsPresenter @Inject constructor(
 			tags = event.data.tags,
 			liveEvents = event.data.liveEvents,
 			live = StatusBroadcast.START.takeIf { event.data.live } ?: StatusBroadcast.END
+		)
+	}
+
+	private fun createPhotoAlbumScreenParams(event: Event): PhotoAlbumScreenParams {
+		event.data as EventDataPhotoAlbum
+		return PhotoAlbumScreenParams(
+			url =  event.url,
+			id = event.id,
+			publishDate = event.publishDate,
+			backgroundImage = event.data.backgroundImage,
+			title = event.data.title,
+			photoUrlList = event.data.photoUrlList
 		)
 	}
 

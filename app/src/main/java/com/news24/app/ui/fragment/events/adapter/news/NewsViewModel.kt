@@ -14,8 +14,9 @@ data class NewsViewModel(
 
 	override var sizeForm: SizeForm = SizeForm.BIG_FORM
 
-	override fun getSpanSize(): Int {
-		return BaseEventViewModel.BIG_SPAN.takeIf { sizeForm == SizeForm.BIG_FORM } ?: BaseEventViewModel.SMALL_SPAN
-	}
+	override var spanSize: Int
+		get() = BaseEventViewModel.BIG_SPAN.takeIf { sizeForm == SizeForm.BIG_FORM }
+					?: BaseEventViewModel.SMALL_SPAN
+		set(value) { }
 
 }

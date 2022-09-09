@@ -1,4 +1,4 @@
-package com.news24.app.ui.fragment.detail.article
+package com.news24.app.ui.fragment.detail.photoalbum
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,20 +7,22 @@ import android.view.ViewGroup
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnLayout
 import androidx.core.view.updateLayoutParams
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.news24.app.R
-import com.news24.app.databinding.FragmentArticleBinding
+import com.news24.app.databinding.FragmentPhotoAlbumBinding
 import com.news24.app.extensions.shared.doOnApplyWindowInsets
 import com.news24.app.extensions.shared.setVisibility
 import com.news24.app.helpers.DimensHelper.dpToPx
 import com.news24.app.helpers.DimensHelper.pxToDp
 import com.news24.app.helpers.ImageHelper
 import com.news24.app.helpers.SpanTextHelper
+import com.news24.app.ui.adapter.GridListViewModel
 import com.news24.app.ui.adapter.ListViewModel
+import com.news24.app.ui.adapter.listener.ListItemClickListener
 import com.news24.app.ui.fragment.base.BaseFragment
-import com.news24.app.ui.fragment.detail.article.adapter.ArticleAdapter
-import com.news24.app.ui.fragment.detail.article.model.ArticleScreenParams
+import com.news24.app.ui.fragment.detail.photoalbum.adapter.PhotoAlbumAdapter
+import com.news24.app.ui.fragment.detail.photoalbum.model.PhotoAlbumScreenParams
 import com.news24.app.ui.widget.EventActionPanelView
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -28,28 +30,29 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 
-class ArticleFragment: BaseFragment(), ArticleContract.View {
+class PhotoAlbumFragment : BaseFragment(), PhotoAlbumContract.View {
 
     @InjectPresenter
-    lateinit var presenter: ArticleContract.Presenter
+    lateinit var presenter: PhotoAlbumContract.Presenter
 
     @Inject
-    lateinit var presenterProvider: Provider<ArticleContract.Presenter>
+    lateinit var presenterProvider: Provider<PhotoAlbumContract.Presenter>
 
     @Inject
-    lateinit var adapter: ArticleAdapter
+    lateinit var adapter: PhotoAlbumAdapter
 
-    private val fragmentBinding by lazy { FragmentArticleBinding.inflate(layoutInflater) }
+    private val fragmentBinding by lazy { FragmentPhotoAlbumBinding.inflate(layoutInflater) }
 
     //region ===================== Fragment creation ======================
 
     companion object {
         private const val KEY_PARAMS = "KEY_PARAMS"
+        const val CONTENT_COLUMNS_COUNT = 2
         private const val TOP_CORNER_RADIUS_DP = 16
         private const val BOTTOM_CORNER_RADIUS_PX = 0f
 
-        fun newInstance(params: ArticleScreenParams): ArticleFragment {
-            val fragment = ArticleFragment()
+        fun newInstance(params: PhotoAlbumScreenParams): PhotoAlbumFragment {
+            val fragment = PhotoAlbumFragment()
             fragment.arguments = Bundle().apply {
                 putParcelable(KEY_PARAMS, params)
             }
@@ -82,6 +85,12 @@ class ArticleFragment: BaseFragment(), ArticleContract.View {
 
     //region ==================== UI handlers ====================
 
+    private val itemClickListener = object : ListItemClickListener {
+        override fun onListItemClicked(delegateViewModel: ListViewModel) {
+            presenter.onListItemClicked(delegateViewModel)
+        }
+    }
+
     private val actionPanelListener = object : EventActionPanelView.EventActionPanelListener {
         override fun onReadFurther() {
             presenter.onReadFurtherClicked()
@@ -94,12 +103,18 @@ class ArticleFragment: BaseFragment(), ArticleContract.View {
 
     private val btnBackClickListener = View.OnClickListener { presenter.onBackClicked() }
 
+    private val onPhotosSpanSizeProvider = object: GridLayoutManager.SpanSizeLookup() {
+        override fun getSpanSize(position: Int): Int {
+            return (adapter.items[position] as? GridListViewModel)?.spanSize ?: CONTENT_COLUMNS_COUNT
+        }
+    }
+
     private val scrollChangedListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
 
             fragmentBinding.apply {
-                val layoutManager = rvContent.layoutManager as LinearLayoutManager
+                val layoutManager = rvContent.layoutManager as GridLayoutManager
                 val lastVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition()
                 if (lastVisibleItemPosition  > 0 && lastVisibleItemPosition >= adapter.itemCount - 1) {
                     hideGradientBottom()
@@ -116,11 +131,7 @@ class ArticleFragment: BaseFragment(), ArticleContract.View {
     //endregion
 
 
-    //region ==================== ArticleContract.View ====================
-
-    override fun setTestHeader(text: String) {
-        fragmentBinding.tvTest.text = text
-    }
+    //region ==================== PhotoAlbumContract.View ====================
 
     override fun showBackground(imgBack: String) {
         ImageHelper.loadImageByUrlToImageView(imgBack, fragmentBinding.ivBackground, ImageHelper.CENTER_CROP)
@@ -130,7 +141,7 @@ class ArticleFragment: BaseFragment(), ArticleContract.View {
         adapter.swapItems(list)
     }
 
-    override fun shareArticle(url: String) {
+    override fun sharePhotoAlbum(url: String) {
         showShareDialog(url)
     }
 
@@ -140,14 +151,14 @@ class ArticleFragment: BaseFragment(), ArticleContract.View {
     //region ===================== DI ======================
 
     private fun configureDI() {
-        val params = requireArguments().getParcelable<ArticleScreenParams>(KEY_PARAMS)!!
+        val params = requireArguments().getParcelable<PhotoAlbumScreenParams>(KEY_PARAMS)!!
 
-        val component = getAppComponent().plus(ArticleModule(requireActivity(), params))
+        val component = getAppComponent().plus(PhotoAlbumModule(requireActivity(), itemClickListener, params))
         component.inject(this)
     }
 
     @ProvidePresenter
-    internal fun providePresenter(): ArticleContract.Presenter {
+    internal fun providePresenter(): PhotoAlbumContract.Presenter {
         return presenterProvider.get()
     }
 
@@ -157,8 +168,9 @@ class ArticleFragment: BaseFragment(), ArticleContract.View {
     //region ===================== UI ======================
 
     private fun initUI(view: View) {
-        val title = SpanTextHelper.getSpannableStringBuilderWithAddedIcon(requireContext(),
-            R.drawable.ic_top, resources.getString(R.string.common_top))
+        val title = SpanTextHelper.getSpannableStringBuilderWithAddedIcon(requireContext(), R.drawable.ic_top,
+            resources.getString(R.string.common_top)
+        )
         setupStableToolbar(view, title, R.drawable.ic_back, btnBackClickListener)
 
         fragmentBinding.apply {
@@ -166,7 +178,9 @@ class ArticleFragment: BaseFragment(), ArticleContract.View {
                 contentContainer.setCorners(radius, radius, BOTTOM_CORNER_RADIUS_PX, BOTTOM_CORNER_RADIUS_PX)
             }
 
-            rvContent.layoutManager = LinearLayoutManager(context)
+            val gridLayoutManager =  GridLayoutManager(context, CONTENT_COLUMNS_COUNT)
+            gridLayoutManager.spanSizeLookup = onPhotosSpanSizeProvider
+            rvContent.layoutManager = gridLayoutManager
             rvContent.adapter = adapter
             rvContent.addOnScrollListener(scrollChangedListener)
 
@@ -177,7 +191,7 @@ class ArticleFragment: BaseFragment(), ArticleContract.View {
                 }
             }
             bottomPanel.doOnLayout {
-                presenter.setOffset(tvTest.height.pxToDp(requireContext()), ivBackground.height.pxToDp(requireContext()))
+                presenter.setOffset(it.height.pxToDp(requireContext()))
             }
         }
     }

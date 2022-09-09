@@ -16,6 +16,8 @@ import com.news24.app.ui.fragment.detail.broadcast.BroadcastComponent
 import com.news24.app.ui.fragment.detail.broadcast.BroadcastModule
 import com.news24.app.ui.fragment.detail.news.NewsComponent
 import com.news24.app.ui.fragment.detail.news.NewsModule
+import com.news24.app.ui.fragment.detail.photoalbum.PhotoAlbumComponent
+import com.news24.app.ui.fragment.detail.photoalbum.PhotoAlbumModule
 import com.news24.app.ui.fragment.events.EventsComponent
 import com.news24.app.ui.fragment.events.EventsModule
 import com.news24.app.ui.fragment.onboarding.OnboardingComponent
@@ -31,6 +33,7 @@ import com.news24.app.ui.fragment.webview.WebViewComponent
 import com.news24.app.ui.fragment.webview.WebViewModule
 import dagger.Component
 import javax.inject.Singleton
+
 
 @Singleton
 @Component(modules = [
@@ -70,5 +73,7 @@ interface AppComponent {
     fun plus(module: PreloaderDialogModule): PreloaderDialogComponent
 
     fun plus(module: BroadcastModule): BroadcastComponent
+
+    fun plus(module: PhotoAlbumModule): PhotoAlbumComponent
 
 }

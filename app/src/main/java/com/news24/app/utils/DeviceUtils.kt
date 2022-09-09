@@ -46,5 +46,4 @@ object DeviceUtils {
 		return displayMetrics.heightPixels
 	}
 
-
 }

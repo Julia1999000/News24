@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/content_horizontal_padding">
+
+    <View
+        android:id="@+id/iconPhotos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_album"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.08" />
+
+    <TextView
+        android:id="@+id/tvNumber"
+        style="@style/S20RegularWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/content_horizontal_padding"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/iconPhotos"
+        app:layout_constraintStart_toEndOf="@+id/iconPhotos"
+        app:layout_constraintTop_toTopOf="@+id/iconPhotos"
+        tools:text="40" />
+</androidx.constraintlayout.widget.ConstraintLayout>

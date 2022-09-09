@@ -1,4 +1,4 @@
-package com.news24.app.ui.fragment.detail.news
+package com.news24.app.ui.fragment.detail.photoalbum
 
 import com.news24.app.ui.adapter.ListViewModel
 import com.news24.app.ui.fragment.base.BaseDisposablePresenter
@@ -8,24 +8,21 @@ import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 
-interface NewsContract {
+interface PhotoAlbumContract {
 
     @StateStrategyType(value = AddToEndSingleStrategy::class)
-    interface View: MvpView {
+    interface View : MvpView {
 
         fun showData(list: List<ListViewModel>)
 
         fun showBackground(imgBack: String)
 
-        fun setTestHeader(text: String)
-
         @StateStrategyType(OneExecutionStateStrategy::class)
-        fun shareNews(url: String)
+        fun sharePhotoAlbum(url: String)
 
     }
 
-
-    abstract class Presenter: BaseDisposablePresenter<View>() {
+    abstract class Presenter : BaseDisposablePresenter<View>() {
 
         abstract fun onBackClicked()
 
@@ -33,7 +30,9 @@ interface NewsContract {
 
         abstract fun onReadFurtherClicked()
 
-        abstract fun setOffset(heightHeaderDp: Int, heightBackDp: Int)
+        abstract fun setOffset(heightBottomPanelDp: Int)
+
+        abstract fun onListItemClicked(item: ListViewModel)
 
     }
 

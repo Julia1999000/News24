@@ -8,6 +8,7 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
+
 interface BroadcastContract {
 
     @StateStrategyType(value = AddToEndSingleStrategy::class)
@@ -34,7 +35,7 @@ interface BroadcastContract {
 
         abstract fun onReadFurtherClicked()
 
-        abstract fun setHeightListViewModel(heightHeaderPx: Int, heightBackPx: Int)
+        abstract fun setOffset(heightHeaderDp: Int, heightBackDp: Int)
 
     }
 
