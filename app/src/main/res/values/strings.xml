@@ -27,5 +27,7 @@
 	<string name="live_end">Трансляция окончена</string>
 
 	<string name="sharing_title">Взгляните на это… 👀</string>
+	
+	<string name="photo_viewer_toolbar">%d из %d</string>
 
 </resources>

@@ -6,7 +6,9 @@ import javax.inject.Inject
 
 
 @InjectViewState
-class PreloaderDialogPresenter @Inject constructor(private val router: Router) : PreloaderDialogContract.Presenter() {
+class PreloaderDialogPresenter @Inject constructor(
+        private val router: Router
+) : PreloaderDialogContract.Presenter() {
 
     //region ==================== MVP Presenter ====================
 

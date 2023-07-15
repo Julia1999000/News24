@@ -3,14 +3,19 @@ package com.news24.app.ui.fragment.base
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
+import androidx.core.view.updateLayoutParams
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.news24.app.R
 import com.news24.app.components.AppContext
 import com.news24.app.di.AppComponent
+import com.news24.app.extensions.shared.doOnApplyWindowInsets
+import com.news24.app.extensions.shared.setVisibility
 import com.news24.app.helpers.KeyboardHelper
 import com.news24.app.helpers.ResourceIdHelper.getDrawable
 import com.news24.app.ui.activity.base.BaseScreenActivity
@@ -133,6 +138,27 @@ open class BaseFragment : MvpAppCompatFragment() {
                         AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL
                     }
                 }
+            }
+        }
+    }
+
+    fun setTitleToolbar(inflatedView: View, title: CharSequence?) {
+        val toolbar = inflatedView.findViewById<AppBarLayout>(R.id.toolbar)
+        (toolbar?.children?.firstOrNull() as? MaterialToolbar)?.let {
+            it.title = title
+        }
+    }
+
+    fun setVisibilityToolbar(inflatedView: View, isVisible: Boolean) {
+        val toolbar = inflatedView.findViewById<AppBarLayout>(R.id.toolbar)
+        toolbar.setVisibility(isVisible)
+    }
+
+    fun applyWindowInsertsToToolbar(inflatedView: View) {
+        val toolbar = inflatedView.findViewById<AppBarLayout>(R.id.toolbar)
+        toolbar.doOnApplyWindowInsets { view, insets, padding ->
+            toolbar.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                this.topMargin = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
             }
         }
     }

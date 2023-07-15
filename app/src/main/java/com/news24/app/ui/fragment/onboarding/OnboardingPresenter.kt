@@ -31,27 +31,7 @@ class OnboardingPresenter @Inject constructor(
 	override fun onFirstViewAttach() {
 		super.onFirstViewAttach()
 		appService.setShouldShowOnboardingScreen(false)
-
-		val viewModels = arrayListOf<ListViewModel>()
-
-		viewModels.add(OnboardingViewModel(FIRST_PAGE_SLIDER_ID,
-				resourceProvider.getString(R.string.onboarding_description_first),
-				R.drawable.ic_onboarding_first))
-
-		viewModels.add(OnboardingViewModel(SECOND_PAGE_SLIDER_ID,
-				resourceProvider.getString(R.string.onboarding_description_second),
-				R.drawable.ic_onboarding_second))
-
-		viewModels.add(OnboardingViewModel(THIRD_PAGE_SLIDER_ID,
-				resourceProvider.getString(R.string.onboarding_description_third),
-				R.drawable.ic_onboarding_third))
-
-		viewModels.add(OnboardingViewModel(FOURTH_PAGE_SLIDER_ID,
-				resourceProvider.getString(R.string.onboarding_description_fourth),
-				R.drawable.ic_onboarding_fourth))
-
-		viewState.showItemList(viewModels)
-
+		showItemList()
 	}
 
 	//endregion
@@ -67,6 +47,32 @@ class OnboardingPresenter @Inject constructor(
 
 
 	//region ===================== Internal ======================
+
+	private fun showItemList() {
+		val viewModels = arrayListOf<ListViewModel>()
+
+		viewModels.add(OnboardingViewModel(
+			FIRST_PAGE_SLIDER_ID,
+			resourceProvider.getString(R.string.onboarding_description_first),
+			R.drawable.ic_onboarding_first))
+
+		viewModels.add(OnboardingViewModel(
+			SECOND_PAGE_SLIDER_ID,
+			resourceProvider.getString(R.string.onboarding_description_second),
+			R.drawable.ic_onboarding_second))
+
+		viewModels.add(OnboardingViewModel(
+			THIRD_PAGE_SLIDER_ID,
+			resourceProvider.getString(R.string.onboarding_description_third),
+			R.drawable.ic_onboarding_third))
+
+		viewModels.add(OnboardingViewModel(
+			FOURTH_PAGE_SLIDER_ID,
+			resourceProvider.getString(R.string.onboarding_description_fourth),
+			R.drawable.ic_onboarding_fourth))
+
+		viewState.showItemList(viewModels)
+	}
 
 	//endregion
 

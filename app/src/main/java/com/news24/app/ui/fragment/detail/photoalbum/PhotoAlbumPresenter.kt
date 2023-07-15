@@ -9,13 +9,16 @@ import com.news24.app.ui.fragment.detail.photoalbum.adapter.countphotos.CountPho
 import com.news24.app.ui.fragment.detail.photoalbum.adapter.photoalbumcontent.groupofphotos.GroupOfPhotosViewModel
 import com.news24.app.ui.fragment.detail.photoalbum.adapter.photoalbumcontent.onephoto.OnePhotoViewModel
 import com.news24.app.ui.fragment.detail.photoalbum.model.PhotoAlbumScreenParams
+import com.news24.app.ui.fragment.photoviewer.model.PhotoViewerScreenParams
 import com.news24.app.ui.fragment.webview.model.WebViewParams
 import com.news24.app.ui.navigation.Screens
+import moxy.InjectViewState
 import ru.terrakok.cicerone.Router
 import java.util.ArrayList
 import javax.inject.Inject
 
 
+@InjectViewState
 class PhotoAlbumPresenter @Inject constructor(
         private val router: Router,
         private val params: PhotoAlbumScreenParams
@@ -51,7 +54,8 @@ class PhotoAlbumPresenter @Inject constructor(
     override fun onListItemClicked(item: ListViewModel) {
         when(item) {
             is OnePhotoViewModel -> {
-                // TODO open photo
+                router.navigateTo(Screens.PhotoContainerScreen(Screens.PhotoViewerScreen(
+                    PhotoViewerScreenParams(params.photoUrlList, item.photoUrl))))
             }
         }
     }

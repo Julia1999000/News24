@@ -38,6 +38,13 @@
 			android:screenOrientation="portrait"
 			android:windowSoftInputMode="adjustResize" />
 
+		<activity
+			android:name=".ui.activity.photo.PhotoScreenActivity"
+			android:theme="@style/PhotoViewerScreenTheme"
+			android:windowSoftInputMode="stateAlwaysHidden"
+			android:screenOrientation="userPortrait"
+			/>
+
 	</application>
 
 </manifest>

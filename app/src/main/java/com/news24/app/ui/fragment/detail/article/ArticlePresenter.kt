@@ -11,11 +11,13 @@ import com.news24.app.ui.fragment.detail.news.adapter.tagscontainer.TagsContaine
 import com.news24.app.ui.fragment.webview.model.WebViewParams
 import com.news24.app.ui.navigation.Screens
 import com.news24.app.ui.other.device.DeviceProvider
+import moxy.InjectViewState
 import ru.terrakok.cicerone.Router
 import java.util.ArrayList
 import javax.inject.Inject
 
 
+@InjectViewState
 class ArticlePresenter @Inject constructor(
         private val router: Router,
         private val params: ArticleScreenParams,

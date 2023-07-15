@@ -17,7 +17,9 @@ interface ContainerScreenComponent {
 
 
 @Module
-class ContainerScreenModule(private val startScreen: SupportAppScreen?) {
+class ContainerScreenModule(
+		private val startScreen: SupportAppScreen?
+) {
 
 	@Provides
 	@Named(NamedDependencies.START_SCREEN)

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--styles are available to all API levels-->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 	<!-- Application theme. -->
 	<style name="Theme.News24" parent="Theme.Base">
 		<item name="colorTransparent">@color/transparent</item>
-
 	</style>
 
 	<style name="TranslucentScreenTheme" parent="Theme.News24">
@@ -29,6 +28,16 @@
 	<!-- Screen theme. -->
 	<style name="ScreenTheme" parent="NonTransparentScreenTheme">
 		<item name="android:windowBackground">?attr/colorSecondary</item>
+		<item name="toolbarStyle">@style/CenteredAppBarTheme</item>
+	</style>
+
+	<!-- Photo Viewer Screen theme. -->
+	<style name="PhotoViewerScreenTheme" parent="TranslucentScreenTheme">
+		<item name="android:windowBackground">?attr/colorSecondary</item>
+		<item name="android:statusBarColor">?attr/colorOnSecondary</item>
+		<item name="android:navigationBarColor">?attr/colorOnSecondary</item>
+		<item name="toolbarStyle">@style/PhotoViewerAppBarTheme</item>
+		<item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="o_mr1">shortEdges</item>
 	</style>
 
 	<!-- Button theme. -->
@@ -47,6 +56,13 @@
 		<item name="android:background">?attr/colorSecondary</item>
 		<item name="titleTextAppearance">@style/S24ExtraBoldBlackOrWhite</item>
 		<item name="titleCentered">true</item>
+		<item name="titleTextColor">?attr/colorSecondaryVariant</item>
+	</style>
+
+	<style name="PhotoViewerAppBarTheme" parent="@style/Widget.MaterialComponents.Toolbar.Primary">
+		<item name="android:background">?attr/colorOnSecondary</item>
+		<item name="titleTextAppearance">@style/S20Bold</item>
+		<item name="titleCentered">false</item>
 		<item name="titleTextColor">?attr/colorSecondaryVariant</item>
 	</style>
 

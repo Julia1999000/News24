@@ -8,6 +8,8 @@ import com.news24.app.ui.activity.container.ContainerScreenComponent
 import com.news24.app.ui.activity.container.ContainerScreenModule
 import com.news24.app.ui.activity.main.MainScreenComponent
 import com.news24.app.ui.activity.main.MainScreenModule
+import com.news24.app.ui.activity.photo.PhotoScreenComponent
+import com.news24.app.ui.activity.photo.PhotoScreenModule
 import com.news24.app.ui.activity.splash.SplashScreenComponent
 import com.news24.app.ui.activity.splash.SplashScreenModule
 import com.news24.app.ui.fragment.detail.article.ArticleModule
@@ -22,6 +24,8 @@ import com.news24.app.ui.fragment.events.EventsComponent
 import com.news24.app.ui.fragment.events.EventsModule
 import com.news24.app.ui.fragment.onboarding.OnboardingComponent
 import com.news24.app.ui.fragment.onboarding.OnboardingModule
+import com.news24.app.ui.fragment.photoviewer.PhotoViewerComponent
+import com.news24.app.ui.fragment.photoviewer.PhotoViewerModule
 import com.news24.app.ui.fragment.preloaderdialog.PreloaderDialogComponent
 import com.news24.app.ui.fragment.preloaderdialog.PreloaderDialogModule
 import com.news24.app.ui.fragment.profile.ProfileComponent
@@ -75,5 +79,9 @@ interface AppComponent {
     fun plus(module: BroadcastModule): BroadcastComponent
 
     fun plus(module: PhotoAlbumModule): PhotoAlbumComponent
+
+    fun plus(module: PhotoViewerModule): PhotoViewerComponent
+
+    fun plus(module: PhotoScreenModule): PhotoScreenComponent
 
 }
